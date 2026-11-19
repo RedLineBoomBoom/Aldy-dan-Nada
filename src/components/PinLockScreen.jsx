@@ -80,15 +80,17 @@ export default function PinLockScreen({ onUnlock }) {
   }, [pin, isSuccess]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#200812]/80 backdrop-blur-lg touch-none overscroll-none overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#200812]/80 backdrop-blur-lg touch-none overscroll-none select-none overflow-hidden">
       <div
-        className={`relative w-full max-w-[320px] sm:max-w-sm bg-white/95 border border-rose-200/90 rounded-3xl p-5 sm:p-7 text-center shadow-2xl transition-all duration-300 my-auto ${
+        className={`relative w-full max-w-[320px] sm:max-w-sm bg-white/95 border border-rose-200/90 rounded-3xl p-5 sm:p-7 text-center shadow-2xl transition-all duration-300 my-auto overflow-hidden touch-none overscroll-none select-none ${
           isError ? 'animate-shake' : ''
         }`}
       >
-        {/* Glow Effects */}
-        <div className="absolute -top-12 -right-12 w-32 h-32 bg-rose-300/40 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-300/40 rounded-full blur-2xl pointer-events-none" />
+        {/* Glow Effects safely contained */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none -z-10">
+          <div className="absolute -top-12 -right-12 w-32 h-32 bg-rose-300/40 rounded-full blur-2xl" />
+          <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-300/40 rounded-full blur-2xl" />
+        </div>
 
         {/* Lock / Unlock Icon Header */}
         <div className="relative mx-auto w-12 h-12 sm:w-16 sm:h-16 mb-2.5 sm:mb-4 flex items-center justify-center rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-400 text-white shadow-lg shadow-rose-500/30 transition-transform duration-300">

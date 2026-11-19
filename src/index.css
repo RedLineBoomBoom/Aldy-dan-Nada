@@ -9,12 +9,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     background-color: #fff9fa;
     color: #4a2835;
     font-family: var(--font-sans);
     overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
   h1, h2, h3, h4 {
     text-wrap: balance;
