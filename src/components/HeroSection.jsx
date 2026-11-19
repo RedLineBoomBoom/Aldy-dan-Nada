@@ -69,10 +69,10 @@ export default function HeroSection({ featuredPhotos = [] }) {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-tr from-rose-200/40 via-pink-100/30 to-amber-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Top Cute Pill */}
-      <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-rose-100/80 border border-rose-200/90 text-rose-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-sm animate-float-slow">
-        <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500" />
-        <span>Spesial 4 Tahun Perjalanan Cinta</span>
-        <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500" />
+      <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-rose-100/80 border border-rose-200/90 text-rose-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-sm animate-float-slow whitespace-nowrap">
+        <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500 shrink-0" />
+        <span className="whitespace-nowrap">Spesial 4 Tahun Perjalanan Cinta</span>
+        <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
       </div>
 
       {/* Main Heading */}
@@ -148,9 +148,10 @@ export default function HeroSection({ featuredPhotos = [] }) {
             {/* Click to shuffle badge */}
             <button
               onClick={handleNextPhoto}
-              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 backdrop-blur-sm hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow flex items-center gap-1 transition active:scale-95 cursor-pointer"
+              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 backdrop-blur-sm hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow flex items-center gap-1 transition active:scale-95 cursor-pointer whitespace-nowrap"
             >
-              <RotateCw className="w-3 h-3" /> Ganti ({activePhotoIdx + 1}/{samplePhotos.length})
+              <RotateCw className="w-3 h-3 shrink-0" />
+              <span className="whitespace-nowrap">Ganti ({activePhotoIdx + 1}/{samplePhotos.length})</span>
             </button>
           </div>
 

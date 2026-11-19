@@ -84,8 +84,9 @@ export default function CoupleQuizGame() {
       {!isFinished ? (
         <div>
           <div className="flex items-center justify-between text-xs font-semibold text-rose-500 mb-4">
-            <span className="flex items-center gap-1 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
-              <HelpCircle className="w-3.5 h-3.5" /> Pertanyaan {currentQ + 1} dari {QUESTIONS.length}
+            <span className="flex items-center gap-1 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200 whitespace-nowrap">
+              <HelpCircle className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">Pertanyaan {currentQ + 1} dari {QUESTIONS.length}</span>
             </span>
             <span className="text-gray-400">Mini Quiz Lucu</span>
           </div>

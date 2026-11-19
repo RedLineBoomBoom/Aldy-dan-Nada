@@ -98,8 +98,9 @@ export default function CouplesFunZone() {
     <section id="fun-zone" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto section-opt">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-16">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
-          <Sparkles className="w-3.5 h-3.5" /> Zona Manis &amp; Gemas
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
+          <Sparkles className="w-3.5 h-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Zona Manis &amp; Gemas</span>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
           Spesial Buat <span className="inline-block whitespace-nowrap">Nada Tersenyum</span>
@@ -190,7 +191,7 @@ export default function CouplesFunZone() {
                       {coupon.category}
                     </span>
                     {isClaimed && (
-                      <span className="bg-rose-500/10 border border-rose-500 text-rose-600 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wider uppercase shrink-0 animate-in fade-in">
+                      <span className="bg-rose-500/10 border border-rose-500 text-rose-600 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wider uppercase shrink-0 animate-in fade-in whitespace-nowrap">
                         ✓ TERKLAIM
                       </span>
                     )}

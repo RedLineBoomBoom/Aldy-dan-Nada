@@ -82,8 +82,9 @@ export default function OpenWhenLetters() {
     <section id="open-when" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto section-opt">
       {/* Header */}
       <div className="text-center mb-10 sm:mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
-          <Mail className="w-3.5 h-3.5" /> Amplop Spesial Mood
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
+          <Mail className="w-3.5 h-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Amplop Spesial Mood</span>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
           Surat "Open When..." <span className="inline-block whitespace-nowrap">Untuk Nada 💌</span>
@@ -107,7 +108,7 @@ export default function OpenWhenLetters() {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-3xl">{letter.icon}</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200/60">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200/60 whitespace-nowrap">
                   {letter.badge}
                 </span>
               </div>

@@ -131,7 +131,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
                 />
 
                 {/* Year tag badge */}
-                <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 px-1.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-medium tracking-wide">
+                <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 px-1.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-medium tracking-wide whitespace-nowrap">
                   Thn {photo.year}
                 </div>
 

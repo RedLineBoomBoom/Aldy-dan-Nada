@@ -130,23 +130,25 @@ export default function WelcomeModal({ onOpenWebsite }) {
         </div>
 
         {/* Floating Heart / Lock Icon badge */}
-        <div className="relative mx-auto w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 flex items-center justify-center bg-gradient-to-tr from-rose-500 to-pink-400 rounded-2xl shadow-lg shadow-rose-500/25 animate-float-slow shrink-0">
+        <div className="relative mx-auto w-12 h-12 sm:w-16 sm:h-16 mb-2.5 sm:mb-3 flex items-center justify-center bg-gradient-to-tr from-rose-500 to-pink-400 rounded-2xl shadow-lg shadow-rose-500/25 animate-float-slow shrink-0">
           {isLocked ? (
             <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-white animate-pulse" />
           ) : (
             <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white animate-heart-beat" />
           )}
-          <div className="absolute -top-1 -right-1 bg-amber-400 text-amber-950 text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-bold shadow flex items-center gap-1">
-            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> 4 Tahun!
+          <div className="absolute -top-1.5 -right-2.5 bg-amber-400 text-amber-950 text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full font-bold shadow-md flex items-center gap-1 whitespace-nowrap select-none pointer-events-none z-20">
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-950 shrink-0" />
+            <span className="whitespace-nowrap font-bold">4 Tahun!</span>
           </div>
         </div>
 
         {/* Romantic greeting text */}
-        <span className="inline-block text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-rose-500 mb-0.5">
+        <span className="inline-block text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-rose-500 mb-0.5 whitespace-nowrap">
           Surat Spesial Dari Aldy
         </span>
         <h1 className="text-base sm:text-2xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
-          Happy 4th Anniversary, <span className="inline-block whitespace-nowrap">Nada! 🌸</span>
+          <span className="inline-block whitespace-nowrap">Happy 4th Anniversary,</span>{' '}
+          <span className="inline-block whitespace-nowrap">Nada! 🌸</span>
         </h1>
         <p className="text-[11px] sm:text-sm text-gray-600 leading-relaxed mb-2.5 sm:mb-4 px-1">
           Nggak kerasa udah 4 tahun kita jalan bareng, ngelewatin ratusan cerita, tawa, dan kenangan indah. Ada sesuatu yang spesial buat kamu di sini...
@@ -155,50 +157,50 @@ export default function WelcomeModal({ onOpenWebsite }) {
         {/* Live Countdown Box (Shown when locked or countdown active) */}
         {!timeLeft.isPast && (
           <div className="bg-rose-50/90 border border-rose-200/80 rounded-2xl p-2 sm:p-3.5 mb-2.5 sm:mb-3.5 text-center">
-            <div className="flex items-center justify-center gap-1.5 text-[9.5px] sm:text-[11px] font-bold text-rose-600 uppercase tracking-wider mb-1 sm:mb-2">
-              <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              <span>
+            <div className="flex items-center justify-center gap-1.5 text-[9.5px] sm:text-[11px] font-bold text-rose-600 uppercase tracking-wider mb-1 sm:mb-2 whitespace-nowrap">
+              <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">
                 {isLocked ? 'Terkunci Menuju 22 November 2026' : 'Countdown Menuju 22 November 2026'}
               </span>
             </div>
 
             <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
-              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs">
-                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600">
+              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs text-center">
+                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600 whitespace-nowrap">
                   {timeLeft.days}
                 </span>
-                <span className="text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold">
+                <span className="block text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold whitespace-nowrap">
                   Hari
                 </span>
               </div>
-              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs">
-                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600">
+              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs text-center">
+                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600 whitespace-nowrap">
                   {String(timeLeft.hours).padStart(2, '0')}
                 </span>
-                <span className="text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold">
+                <span className="block text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold whitespace-nowrap">
                   Jam
                 </span>
               </div>
-              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs">
-                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600">
+              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs text-center">
+                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600 whitespace-nowrap">
                   {String(timeLeft.minutes).padStart(2, '0')}
                 </span>
-                <span className="text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold">
+                <span className="block text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold whitespace-nowrap">
                   Menit
                 </span>
               </div>
-              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs">
-                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600">
+              <div className="bg-white rounded-xl p-1 sm:p-2 border border-rose-100 shadow-xs text-center">
+                <span className="block text-xs sm:text-xl font-bold font-mono text-rose-600 whitespace-nowrap">
                   {String(timeLeft.seconds).padStart(2, '0')}
                 </span>
-                <span className="text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold">
+                <span className="block text-[8px] sm:text-[10px] text-gray-400 uppercase font-semibold whitespace-nowrap">
                   Detik
                 </span>
               </div>
             </div>
 
             {isLocked && (
-              <p className="text-[9.5px] sm:text-[11px] text-rose-500/90 mt-1 sm:mt-1.5 font-medium">
+              <p className="text-[9.5px] sm:text-[11px] text-rose-500/90 mt-1 sm:mt-1.5 font-medium leading-snug">
                 🔒 Tombol akan otomatis terbuka begitu countdown selesai!
               </p>
             )}
@@ -210,22 +212,22 @@ export default function WelcomeModal({ onOpenWebsite }) {
           <div className="w-full">
             <button
               disabled={true}
-              className="w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:py-3 bg-gray-200/90 text-gray-400 font-semibold text-[11px] sm:text-sm rounded-xl sm:rounded-2xl cursor-not-allowed shadow-inner transition"
+              className="w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:py-3 bg-gray-200/90 text-gray-400 font-semibold text-[11px] sm:text-sm rounded-xl sm:rounded-2xl cursor-not-allowed shadow-inner transition whitespace-nowrap"
             >
               <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 shrink-0" />
-              <span>Terkunci • Terbuka 22 November 2026</span>
+              <span className="whitespace-nowrap">Terkunci • Terbuka 22 November 2026</span>
             </button>
-            <p className="text-[9.5px] sm:text-[11px] text-gray-400 mt-1 sm:mt-1.5 italic">
+            <p className="text-[9.5px] sm:text-[11px] text-gray-400 mt-1 sm:mt-1.5 italic leading-snug">
               Sabar ya sayang, kenangan kita akan terbuka saat hari H tiba ❤️
             </p>
           </div>
         ) : (
           <button
             onClick={handleOpen}
-            className="group relative w-full inline-flex items-center justify-center gap-2 sm:gap-2.5 px-4 py-2 sm:py-3.5 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-600 text-white font-medium text-xs sm:text-base rounded-xl sm:rounded-2xl shadow-xl shadow-rose-500/30 hover:shadow-rose-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer"
+            className="group relative w-full inline-flex items-center justify-center gap-2 sm:gap-2.5 px-4 py-2 sm:py-3.5 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-600 text-white font-medium text-xs sm:text-base rounded-xl sm:rounded-2xl shadow-xl shadow-rose-500/30 hover:shadow-rose-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer whitespace-nowrap"
           >
             <Music className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce shrink-0" />
-            <span className="font-semibold tracking-wide">Buka Kenangan Kita &amp; Putar Lagu</span>
+            <span className="font-semibold tracking-wide whitespace-nowrap">Buka Kenangan Kita &amp; Putar Lagu</span>
             <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white shrink-0" />
           </button>
         )}
@@ -233,21 +235,21 @@ export default function WelcomeModal({ onOpenWebsite }) {
         {/* Local mode indicator & testing control */}
         {isLocalHost && (
           <div className="mt-2 pt-1.5 border-t border-rose-100 flex items-center justify-between text-[9.5px] text-gray-400">
-            <span className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-semibold border border-emerald-200">
+            <span className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-semibold border border-emerald-200 whitespace-nowrap">
               🛠️ Mode Local (Tidak Terkunci)
             </span>
             <button
               type="button"
               onClick={() => setPreviewLockedOnLocal(!previewLockedOnLocal)}
-              className="text-rose-500 hover:underline cursor-pointer font-medium"
+              className="text-rose-500 hover:underline cursor-pointer font-medium whitespace-nowrap"
             >
               {previewLockedOnLocal ? 'Kembalikan Terbuka' : 'Tes Tampilan Terkunci'}
             </button>
           </div>
         )}
 
-        <p className="text-[9.5px] sm:text-xs text-rose-400 mt-1.5 sm:mt-2 flex items-center justify-center gap-1">
-          <span>✨ Disarankan pasang earphone untuk pengalaman terbaik</span>
+        <p className="text-[9.5px] sm:text-xs text-rose-400 mt-1.5 sm:mt-2 flex items-center justify-center gap-1 whitespace-nowrap">
+          <span className="whitespace-nowrap">✨ Disarankan pasang earphone untuk pengalaman terbaik</span>
         </p>
       </div>
     </div>

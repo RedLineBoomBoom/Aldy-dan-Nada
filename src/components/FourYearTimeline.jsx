@@ -62,8 +62,9 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
     <section id="timeline" className="relative py-20 px-4 max-w-6xl mx-auto section-opt">
       {/* Section Header */}
       <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-3">
-          <Calendar className="w-3.5 h-3.5" /> Kilas Balik 4 Tahun
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-3 whitespace-nowrap">
+          <Calendar className="w-3.5 h-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Kilas Balik 4 Tahun</span>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
           Perjalanan Cinta <span className="inline-block whitespace-nowrap">Aldy <span className="text-rose-500 italic">&amp;</span> Nada</span>
@@ -111,9 +112,9 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
             </p>
           </div>
 
-          <div className="self-start md:self-center px-4 py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-center gap-2 text-rose-700 text-xs font-semibold">
+          <div className="self-start md:self-center px-4 py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-center gap-2 text-rose-700 text-xs font-semibold whitespace-nowrap">
             <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-            <span>{currentChapter.milestone}</span>
+            <span className="whitespace-nowrap">{currentChapter.milestone}</span>
           </div>
         </div>
 

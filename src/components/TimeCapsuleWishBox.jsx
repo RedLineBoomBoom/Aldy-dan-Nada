@@ -66,8 +66,9 @@ export default function TimeCapsuleWishBox() {
     <section id="kapsul-waktu" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-5xl mx-auto section-opt">
       {/* Header */}
       <div className="text-center mb-10 sm:mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
-          <Hourglass className="w-3.5 h-3.5" /> Menatap Masa Depan
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
+          <Hourglass className="w-3.5 h-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Menatap Masa Depan</span>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
           Kapsul Waktu <span className="inline-block whitespace-nowrap">Harapan Kita ⏳</span>

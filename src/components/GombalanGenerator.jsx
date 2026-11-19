@@ -41,9 +41,9 @@ export default function GombalanGenerator() {
 
   return (
     <div className="bg-gradient-to-br from-rose-50/80 to-pink-50/60 border border-rose-200/80 rounded-3xl p-5 sm:p-8 shadow-sm max-w-xl mx-auto my-10 text-center relative overflow-hidden">
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-rose-600 text-xs font-semibold mb-3 border border-rose-100 shadow-xs">
-        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-        <span>Generator Kata Manis Aldy</span>
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-rose-600 text-xs font-semibold mb-3 border border-rose-100 shadow-xs whitespace-nowrap">
+        <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+        <span className="whitespace-nowrap">Generator Kata Manis Aldy</span>
       </div>
 
       <h3 className="font-romantic text-xl sm:text-2xl font-bold text-gray-900 mb-4">

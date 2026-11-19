@@ -386,9 +386,9 @@ export default function BucinStickersSection() {
       <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-pink-100/80 border border-pink-200 text-rose-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-2.5 shadow-xs">
-            <Smile className="w-3.5 h-3.5" />
-            <span>Koleksi Bucin Gemas</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-pink-100/80 border border-pink-200 text-rose-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-2.5 shadow-xs whitespace-nowrap">
+            <Smile className="w-3.5 h-3.5 shrink-0" />
+            <span className="whitespace-nowrap">Koleksi Bucin Gemas</span>
           </div>
           <h2 className="text-xl sm:text-3xl md:text-4xl font-romantic font-bold text-gray-900 mb-2 leading-tight">
             🐼 Animasi Stiker GIF Gemas <span className="inline-block whitespace-nowrap">(Bucin Stickers)</span>
@@ -404,7 +404,7 @@ export default function BucinStickersSection() {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold transition cursor-pointer ${
+                className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
                   activeCategory === cat
                     ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25 scale-105'
                     : 'bg-white/80 text-gray-600 border border-rose-100 hover:bg-rose-50'
