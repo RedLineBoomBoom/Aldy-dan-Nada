@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "p_01",
+    "src": "/photos/photo_01.webp",
+    "width": 1440,
+    "height": 960,
+    "aspectRatio": 1.5,
+    "isPortrait": false,
+    "year": 1,
+    "date": "2000-01-21",
+    "caption": "Senyum manis Nada yang selalu berhasil bikin hari Aldy cerah ✨",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_02",
+    "src": "/photos/photo_02.webp",
+    "width": 1440,
+    "height": 960,
+    "aspectRatio": 1.5,
+    "isPortrait": false,
+    "year": 1,
+    "date": "2000-01-21",
+    "caption": "Momen random berdua yang selalu penuh tawa dan canda 🥰",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_03",
+    "src": "/photos/photo_03.webp",
+    "width": 1440,
+    "height": 960,
+    "aspectRatio": 1.5,
+    "isPortrait": false,
+    "year": 1,
+    "date": "2000-01-21",
+    "caption": "Foto candid paling gemas, gak pernah bosen liatnya ❤️",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_04",
+    "src": "/photos/photo_04.webp",
+    "width": 1440,
+    "height": 960,
+    "aspectRatio": 1.5,
+    "isPortrait": false,
+    "year": 1,
+    "date": "2000-01-21",
+    "caption": "Kencan berdua yang sederhana tapi kenangannya abadi",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_05",
+    "src": "/photos/photo_05.webp",
+    "width": 810,
+    "height": 1440,
+    "aspectRatio": 0.562,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-09-20",
+    "caption": "Dua kepala dengan seribu cerita seru setiap harinya 🤍",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_06",
+    "src": "/photos/photo_06.webp",
+    "width": 810,
+    "height": 1440,
+    "aspectRatio": 0.562,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-09-20",
+    "caption": "Muka jahil kita pas lagi usil-usilan bareng 🤪",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_07",
+    "src": "/photos/photo_07.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-09-27",
+    "caption": "Tempat favorit dan orang paling favorit di dunia 🌟",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_08",
+    "src": "/photos/photo_08.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-09-27",
+    "caption": "Setiap detik sama kamu rasanya selalu berharga",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_09",
+    "src": "/photos/photo_09.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-09-27",
+    "caption": "Selfie konyol berdua, bukti kalau kita emang sefrekuensi!",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_10",
+    "src": "/photos/photo_10.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-05",
+    "caption": "Di samping kamu, Aldy selalu merasa paling tenang dan bahagia",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_11",
+    "src": "/photos/photo_11.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-05",
+    "caption": "Tatapan penuh sayang yang nggak akan pernah pudar 💕",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_12",
+    "src": "/photos/photo_12.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-06",
+    "caption": "Makan enak bareng, jalan-jalan tanpa arah, asal sama kamu",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_13",
+    "src": "/photos/photo_13.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-18",
+    "caption": "Selalu jadi partner terbaik dalam segala hal",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_14",
+    "src": "/photos/photo_14.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-18",
+    "caption": "Cemberut aja lucu, apalagi pas lagi ketawa lepas begini",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_15",
+    "src": "/photos/photo_15.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 1,
+    "date": "2024-10-18",
+    "caption": "Salah satu hari terbaik yang pernah kita lewatin berdua",
+    "tags": [
+      "Tahun ke-1",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_16",
+    "src": "/photos/photo_16.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "Kenangan yang bakal selalu Aldy simpan erat di dalam hati",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_17",
+    "src": "/photos/photo_17.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "Gaya foto andalan kita kalau lagi excited jalan-jalan",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_18",
+    "src": "/photos/photo_18.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "Melewati hari-hari lelah jadi ringan karena ada kamu di sisi",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_19",
+    "src": "/photos/photo_19.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "Pelukan hangat dan tawa lepas yang cuma bisa ditemuin di kamu",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_20",
+    "src": "/photos/photo_20.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "4 tahun bersama, dan rasa sayangnya terus bertambah setiap hari 🌸",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_21",
+    "src": "/photos/photo_21.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-10-31",
+    "caption": "Definisi rumah ternyaman: kapanpun dan di manapun bareng Nada 🏠❤️",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_22",
+    "src": "/photos/photo_22.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2024-11-19",
+    "caption": "Candid estetik berdua yang gak sengaja tapi hasilnya bagus banget",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_23",
+    "src": "/photos/photo_23.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Momen seru yang bikin pengen ngulang waktu lagi",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_24",
+    "src": "/photos/photo_24.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Selalu ada alasan baru untuk jatuh cinta lagi sama kamu setiap hari",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_25",
+    "src": "/photos/photo_25.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Senyum terbaik dari orang paling spesial di hidup Aldy",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_26",
+    "src": "/photos/photo_26.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Tertawa lepas bareng kamu adalah obat paling manjur di dunia 💖",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_27",
+    "src": "/photos/photo_27.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Dunia boleh berisik, tapi di samping Nada rasanya selalu tenang 🍃",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_28",
+    "src": "/photos/photo_28.webp",
+    "width": 665,
+    "height": 1440,
+    "aspectRatio": 0.462,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-01-11",
+    "caption": "Bukan tentang ke mana kita pergi, tapi tentang sama siapa kita melangkah 👣🤍",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_29",
+    "src": "/photos/photo_29.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-02-07",
+    "caption": "Pipi bulat gemas kesayangan yang selalu bikin gemas pengen cubit 🤏🥰",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_30",
+    "src": "/photos/photo_30.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 2,
+    "date": "2025-02-07",
+    "caption": "Satu dari ribuan alasan kenapa Aldy selalu bersyukur punya kamu ✨",
+    "tags": [
+      "Tahun ke-2",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_31",
+    "src": "/photos/photo_31.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-02-12",
+    "caption": "Gaya bebas kita yang selalu penuh keceriaan tanpa beban 🌈",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_32",
+    "src": "/photos/photo_32.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-02-19",
+    "caption": "Menghabiskan waktu berdua selalu jadi bagian terbaik dari hari-hari Aldy ☕💕",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_33",
+    "src": "/photos/photo_33.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-02-28",
+    "caption": "Tatapan mata yang selalu berhasil bikin deg-degan kayak baru pertama kali kenal 💓",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_34",
+    "src": "/photos/photo_34.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-20",
+    "caption": "Bisa bareng kamu sampai detik ini adalah keajaiban terindah dalam hidupku 🌸",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_35",
+    "src": "/photos/photo_35.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-20",
+    "caption": "Selalu ada cerita baru yang seru untuk kita obrolin berdua sampai lupa waktu 🌙",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_36",
+    "src": "/photos/photo_36.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-20",
+    "caption": "Genggaman tangan sederhana yang selalu bikin hati merasa aman dan hangat 🤝❤️",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_37",
+    "src": "/photos/photo_37.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-20",
+    "caption": "Nemenin kamu jalan-jalan ke mana pun gak bakal pernah ngebosenin 🚗✨",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_38",
+    "src": "/photos/photo_38.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-20",
+    "caption": "Dari sekadar teman ngobrol, sampai jadi orang paling berharga di hati 💫",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_39",
+    "src": "/photos/photo_39.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-28",
+    "caption": "Tingkah lucu kamu yang selalu berhasil balikin mood Aldy yang berantakan ☀️",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_40",
+    "src": "/photos/photo_40.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-28",
+    "caption": "Momen hening berdua pun tetap terasa sangat nyaman kalau sama Nada 🕊️",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_41",
+    "src": "/photos/photo_41.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-05-31",
+    "caption": "Potret kebahagiaan sederhana kita yang tak ternilai harganya 📸🌷",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_42",
+    "src": "/photos/photo_42.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-06-23",
+    "caption": "Makin lama bersama, makin yakin kalau kamu adalah takdir terbaikku 💍",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_43",
+    "src": "/photos/photo_43.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-08-26",
+    "caption": "Senyum kamu itu candu, bikin Aldy gak bisa berhenti jatuh hati lagi dan lagi 🥰",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_44",
+    "src": "/photos/photo_44.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-09-03",
+    "caption": "Tempat bersandar paling nyaman di kala dunia sedang lelah-lelahnya 🫂🤍",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_45",
+    "src": "/photos/photo_45.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 3,
+    "date": "2025-09-03",
+    "caption": "Ekspresi terbaik dari wanita paling hebat yang selalu menemani langkahku 🌻",
+    "tags": [
+      "Tahun ke-3",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_46",
+    "src": "/photos/photo_46.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-05-28",
+    "caption": "Melihat kamu bahagia adalah tujuan terbesar di setiap hariku 💖",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_47",
+    "src": "/photos/photo_47.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-05-28",
+    "caption": "Jalanan panjang yang kita lewati berdua selalu terasa singkat dan menyenangkan 🛣️✨",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_48",
+    "src": "/photos/photo_48.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-05-28",
+    "caption": "Dua hati yang saling melengkapi dan saling menguatkan dalam segala keadaan 🌸",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_49",
+    "src": "/photos/photo_49.webp",
+    "width": 810,
+    "height": 1440,
+    "aspectRatio": 0.562,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Koleksi foto favorit yang selalu bikin senyum-senyum sendiri kalau diliat lagi 🎞️",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_50",
+    "src": "/photos/photo_50.webp",
+    "width": 810,
+    "height": 1440,
+    "aspectRatio": 0.562,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Terima kasih sudah memilih untuk terus melangkah bersama Aldy selama 4 tahun ini ❤️",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_51",
+    "src": "/photos/photo_51.webp",
+    "width": 810,
+    "height": 1440,
+    "aspectRatio": 0.562,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Saling tatap, saling senyum, dan tahu kalau kita saling mencintai tanpa syarat 💫",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_52",
+    "src": "/photos/photo_52.webp",
+    "width": 960,
+    "height": 1440,
+    "aspectRatio": 0.667,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Kencan berdua tanpa rencana yang berakhir jadi kenangan super manis 🍦✨",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_53",
+    "src": "/photos/photo_53.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Wajah bahagia yang selalu ingin Aldy jaga selamanya sampai tua nanti 👵👴",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_54",
+    "src": "/photos/photo_54.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Kamu adalah hal terbaik yang pernah terjadi di dalam hidup Aldy 🌟",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_55",
+    "src": "/photos/photo_55.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Tak peduli sesibuk apa pun hari kita, kamu selalu jadi prioritas nomor satu 🌷",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_56",
+    "src": "/photos/photo_56.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Setiap sudut kenangan kita selalu dipenuhi warna dan tawa yang tulus 🎨",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": true
+  },
+  {
+    "id": "p_57",
+    "src": "/photos/photo_57.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Bersama Nada, Aldy belajar cara mencintai dengan sepenuh dan setulus hati 🤍",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_58",
+    "src": "/photos/photo_58.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Kompak dalam segala hal, dari hal konyol sampai impian-impian besar kita 🚀",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_59",
+    "src": "/photos/photo_59.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Menatap masa depan dengan penuh rasa optimis karena ada kamu di sisi 🌅",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  },
+  {
+    "id": "p_60",
+    "src": "/photos/photo_60.webp",
+    "width": 1080,
+    "height": 1440,
+    "aspectRatio": 0.75,
+    "isPortrait": true,
+    "year": 4,
+    "date": "2026-11-19",
+    "caption": "Selamat 4 tahun perjalanan cinta kita sayang, semoga selamanya bersama Aldy ❤️💍",
+    "tags": [
+      "Tahun ke-4",
+      "Kenangan",
+      "Aldy & Nada"
+    ],
+    "isFeatured": false
+  }
+]
