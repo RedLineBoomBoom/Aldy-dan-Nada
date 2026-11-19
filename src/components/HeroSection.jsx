@@ -139,6 +139,10 @@ export default function HeroSection({ featuredPhotos = [] }) {
             <img
               src={currentPhoto.src}
               alt={currentPhoto.caption || 'Kenangan Aldy dan Nada'}
+              fetchPriority="high"
+              decoding="sync"
+              width={400}
+              height={500}
               className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
             />
             {/* Click to shuffle badge */}

@@ -1,18 +1,47 @@
-import React, { useState } from 'react';
-import { Heart, Camera, Sparkles, Filter, Eye } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Heart, Camera, Sparkles, Filter, Eye, ChevronDown } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
+const INITIAL_BATCH = 16;
+const BATCH_INCREMENT = 16;
 
 export default function InteractivePolaroidWall({ photos = [], likes = {}, onLike, onSelectPhoto }) {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(INITIAL_BATCH);
 
-  const filteredPhotos = photos.filter((p) => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'featured') return p.isFeatured;
-    return p.year === parseInt(activeFilter, 10);
-  });
+  const filteredPhotos = useMemo(() => {
+    return photos.filter((p) => {
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'featured') return p.isFeatured;
+      return p.year === parseInt(activeFilter, 10);
+    });
+  }, [photos, activeFilter]);
+
+  // When filter changes, reset visible count
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+    setVisibleCount(INITIAL_BATCH);
+  };
+
+  // When in specific year, show all photos of that year (typically ~15).
+  // When in 'all', display progressively up to visibleCount to keep mobile browser ultra-fast.
+  const displayedPhotos = useMemo(() => {
+    if (activeFilter !== 'all') return filteredPhotos;
+    return filteredPhotos.slice(0, visibleCount);
+  }, [filteredPhotos, activeFilter, visibleCount]);
+
+  const hasMore = activeFilter === 'all' && visibleCount < filteredPhotos.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + BATCH_INCREMENT, filteredPhotos.length));
+  };
+
+  const handleShowAll = () => {
+    setVisibleCount(filteredPhotos.length);
+  };
 
   return (
-    <section id="galeri" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-7xl mx-auto">
+    <section id="galeri" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-7xl mx-auto section-opt">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
@@ -28,7 +57,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
           <button
-            onClick={() => setActiveFilter('all')}
+            onClick={() => handleFilterChange('all')}
             className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition cursor-pointer ${
               activeFilter === 'all'
                 ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25'
@@ -38,7 +67,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
             ✨ Semua ({photos.length})
           </button>
           <button
-            onClick={() => setActiveFilter('featured')}
+            onClick={() => handleFilterChange('featured')}
             className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition cursor-pointer flex items-center gap-1 ${
               activeFilter === 'featured'
                 ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25'
@@ -51,7 +80,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
           {[1, 2, 3, 4].map((yr) => (
             <button
               key={yr}
-              onClick={() => setActiveFilter(String(yr))}
+              onClick={() => handleFilterChange(String(yr))}
               className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition cursor-pointer ${
                 activeFilter === String(yr)
                   ? 'bg-rose-500 text-white shadow-md shadow-rose-500/25'
@@ -66,8 +95,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
 
       {/* Polaroid Grid Layout: 2 columns on mobile, never overlapping */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6">
-        {filteredPhotos.map((photo, index) => {
-          // No rotation on mobile to avoid overlapping, gentle on desktop
+        {displayedPhotos.map((photo, index) => {
           const photoLikes = likes[photo.id] || 0;
 
           return (
@@ -93,6 +121,9 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
                   src={photo.src}
                   alt={photo.caption}
                   loading="lazy"
+                  decoding="async"
+                  width={photo.width || 400}
+                  height={photo.height || 500}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover/frame:scale-105"
                 />
 
@@ -137,6 +168,25 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
           );
         })}
       </div>
+
+      {/* Progressive Load More Buttons (Ultra-fast mobile performance) */}
+      {hasMore && (
+        <div className="mt-8 sm:mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={handleLoadMore}
+            className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 text-xs sm:text-sm font-bold shadow-sm hover:shadow transition active:scale-95 cursor-pointer"
+          >
+            <span>Tampilkan Foto Lainnya (+{Math.min(BATCH_INCREMENT, filteredPhotos.length - visibleCount)})</span>
+            <ChevronDown className="w-4 h-4" />
+          </button>
+          <button
+            onClick={handleShowAll}
+            className="text-xs text-gray-500 hover:text-rose-600 underline transition cursor-pointer"
+          >
+            Tampilkan Sekaligus ({filteredPhotos.length} Foto)
+          </button>
+        </div>
+      )}
     </section>
   );
 }

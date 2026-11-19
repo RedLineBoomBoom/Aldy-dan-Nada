@@ -16,7 +16,7 @@ export default function LoveLetterSection() {
   };
 
   return (
-    <section id="surat-cinta" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-4xl mx-auto text-center">
+    <section id="surat-cinta" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-4xl mx-auto text-center section-opt">
       <div className="mb-8 sm:mb-10">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
           <Mail className="w-3.5 h-3.5" /> Surat Dari Hati

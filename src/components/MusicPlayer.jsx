@@ -197,7 +197,11 @@ export default function MusicPlayer({ autoPlayTrigger }) {
   useEffect(() => {
     resetHideTimer();
 
+    let lastActivityTime = 0;
     const handleActivity = () => {
+      const now = performance.now();
+      if (now - lastActivityTime < 350) return;
+      lastActivityTime = now;
       resetHideTimer();
     };
 

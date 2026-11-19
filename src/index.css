@@ -135,3 +135,22 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Performance Optimizations for Mobile & Desktop */
+.section-opt {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
+/* GPU Layer Promotion for silky smooth transitions */
+.gpu-smooth {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize mobile rendering for backdrop blurs */
+@media (max-width: 640px) {
+  .polaroid-card {
+    will-change: auto;
+  }
+}

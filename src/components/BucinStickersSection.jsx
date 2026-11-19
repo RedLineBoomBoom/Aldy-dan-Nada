@@ -369,7 +369,7 @@ export default function BucinStickersSection() {
   };
 
   return (
-    <section className="py-12 sm:py-16 px-3.5 sm:px-6 relative overflow-hidden">
+    <section className="py-12 sm:py-16 px-3.5 sm:px-6 relative overflow-hidden section-opt">
       {/* Flying sticker particles */}
       <div className="fixed inset-0 pointer-events-none z-40">
         {flyingStickers.map(f => (
@@ -450,8 +450,11 @@ export default function BucinStickersSection() {
                       <img
                         src={sticker.file}
                         alt={sticker.title}
-                        className="w-full h-full object-contain pointer-events-none group-hover:scale-110 transition duration-300"
+                        width={80}
+                        height={80}
                         loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-contain pointer-events-none group-hover:scale-110 transition duration-300"
                       />
                     </div>
                     <span className="text-[10px] sm:text-xs font-bold text-gray-800 line-clamp-1 text-center w-full px-0.5">

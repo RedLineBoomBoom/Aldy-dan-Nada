@@ -95,7 +95,7 @@ export default function CouplesFunZone() {
   };
 
   return (
-    <section id="fun-zone" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto">
+    <section id="fun-zone" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto section-opt">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-16">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">

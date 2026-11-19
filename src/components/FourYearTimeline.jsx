@@ -59,7 +59,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
   const yearPhotos = photos.filter((p) => p.year === activeYearTab);
 
   return (
-    <section id="timeline" className="relative py-20 px-4 max-w-6xl mx-auto">
+    <section id="timeline" className="relative py-20 px-4 max-w-6xl mx-auto section-opt">
       {/* Section Header */}
       <div className="text-center mb-14">
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -148,6 +148,9 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
                   src={photo.src}
                   alt={photo.caption}
                   loading="lazy"
+                  decoding="async"
+                  width={300}
+                  height={400}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 text-white">
