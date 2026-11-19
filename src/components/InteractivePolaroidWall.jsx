@@ -117,6 +117,11 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
 
               {/* Photo Frame */}
               <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-rose-50 mb-2 sm:mb-3 group/frame">
+                {/* Background placeholder while image loads */}
+                <div className="absolute inset-0 flex items-center justify-center text-rose-200">
+                  <Camera className="w-6 h-6 animate-pulse opacity-60" />
+                </div>
+
                 <img
                   src={photo.src}
                   alt={photo.caption}
@@ -127,7 +132,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
                       e.target.src = photo.src + "?t=" + Date.now();
                     }
                   }}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover/frame:scale-105"
+                  className="relative z-10 w-full h-full object-cover transition-transform duration-500 group-hover/frame:scale-105"
                 />
 
                 {/* Year tag badge */}

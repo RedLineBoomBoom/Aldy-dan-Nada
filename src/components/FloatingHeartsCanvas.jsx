@@ -1,161 +1,235 @@
 import React, { useEffect, useRef } from 'react';
 
-// Pre-defined romantic particles with randomized initial positions and animation timings
-const PARTICLES = [
-  { id: 1, left: '6%', size: 16, duration: 15, delay: 0, type: 'heart', opacity: 0.45, color: '#f43f5e' },
-  { id: 2, left: '16%', size: 12, duration: 18, delay: 4, type: 'petal', opacity: 0.4, color: '#fb7185' },
-  { id: 3, left: '26%', size: 20, duration: 16, delay: 8, type: 'heart', opacity: 0.5, color: '#f43f5e' },
-  { id: 4, left: '36%', size: 10, duration: 21, delay: 2, type: 'sparkle', opacity: 0.35, color: '#fda4af' },
-  { id: 5, left: '46%', size: 18, duration: 14, delay: 6, type: 'heart', opacity: 0.45, color: '#e11d48' },
-  { id: 6, left: '56%', size: 14, duration: 17, delay: 1, type: 'petal', opacity: 0.4, color: '#fb7185' },
-  { id: 7, left: '66%', size: 22, duration: 13, delay: 9, type: 'heart', opacity: 0.5, color: '#f43f5e' },
-  { id: 8, left: '76%', size: 12, duration: 19, delay: 5, type: 'sparkle', opacity: 0.35, color: '#fda4af' },
-  { id: 9, left: '86%', size: 16, duration: 16, delay: 7, type: 'heart', opacity: 0.45, color: '#fb7185' },
-  { id: 10, left: '94%', size: 13, duration: 18, delay: 3, type: 'petal', opacity: 0.4, color: '#f43f5e' },
-  { id: 11, left: '3%', size: 14, duration: 20, delay: 11, type: 'petal', opacity: 0.35, color: '#fda4af' },
-  { id: 12, left: '51%', size: 11, duration: 22, delay: 12, type: 'sparkle', opacity: 0.35, color: '#f43f5e' },
-];
-
-const ICONS = ['❤️', '💖', '✨', '🌸', '💕'];
-
 export default function FloatingHeartsCanvas() {
-  const trailContainerRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    // Only enable mouse trail on desktop devices with fine pointer (mouse / trackpad)
-    if (typeof window === 'undefined') return;
-    const isFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    if (!isFinePointer) return;
+    // Respect user reduced-motion preference
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
 
-    const container = trailContainerRef.current;
-    if (!container) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
 
-    let lastSpawnTime = 0;
+    let animationFrameId;
+    let isRunning = true;
+    let lastDrawTime = 0;
+    const TARGET_FPS = 35; // Silky smooth 35 FPS, gentle on mobile & desktop battery/GPU
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
-    const spawnParticle = (x, y, isClick = false) => {
-      if (!container) return;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
-      // Limit max simultaneous active particles to 25 to protect performance
-      if (container.childElementCount > 25) {
-        container.firstElementChild?.remove();
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    // Romantic watercolor pastel palette
+    const colors = [
+      'rgba(244, 63, 94, 0.42)',   // rose
+      'rgba(251, 113, 133, 0.38)',  // light rose
+      'rgba(249, 168, 212, 0.42)', // soft pink
+      'rgba(253, 186, 116, 0.32)', // warm peach
+      'rgba(216, 180, 254, 0.32)', // dreamy lavender
+    ];
+
+    // Mobile vs Desktop particle budgeting
+    const isMobile = window.innerWidth < 640;
+    const baseCount = isMobile
+      ? Math.min(10, Math.max(6, Math.floor(window.innerWidth / 45)))
+      : Math.min(22, Math.max(14, Math.floor(window.innerWidth / 50)));
+
+    const particles = [];
+
+    class Particle {
+      constructor(isCursor = false, startX = 0, startY = 0) {
+        this.isCursor = isCursor;
+        if (isCursor) {
+          this.x = startX;
+          this.y = startY;
+          this.size = Math.random() * 8 + 8;
+          this.speedY = Math.random() * 0.8 + 0.45;
+          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.angle = Math.random() * Math.PI * 2;
+          this.spin = (Math.random() - 0.5) * 0.025;
+          this.type = Math.random() > 0.4 ? 'heart' : Math.random() > 0.5 ? 'petal' : 'circle';
+          this.opacity = Math.random() * 0.2 + 0.45;
+          this.fadeSpeed = Math.random() * 0.008 + 0.009;
+          this.dead = false;
+        } else {
+          this.reset(true);
+        }
       }
 
-      const el = document.createElement('span');
-      el.className = 'cursor-heart-particle';
+      reset(init = false) {
+        this.x = Math.random() * width;
+        this.y = init ? Math.random() * height : height + 25;
+        this.size = Math.random() * (isMobile ? 9 : 13) + 7;
+        this.speedY = Math.random() * 0.65 + 0.3;
+        this.speedX = (Math.random() - 0.5) * 0.35;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.angle = Math.random() * Math.PI * 2;
+        this.spin = (Math.random() - 0.5) * 0.016;
+        this.type = Math.random() > 0.45 ? 'heart' : Math.random() > 0.55 ? 'petal' : 'circle';
+        this.opacity = Math.random() * 0.4 + 0.22;
+        this.dead = false;
+      }
 
-      const icon = ICONS[Math.floor(Math.random() * ICONS.length)];
-      el.textContent = icon;
+      update() {
+        this.y -= this.speedY;
+        this.x += Math.sin(this.angle) * 0.4 + this.speedX;
+        this.angle += this.spin;
 
-      const size = isClick ? Math.random() * 8 + 16 : Math.random() * 6 + 13;
-      const dx1 = (Math.random() - 0.5) * (isClick ? 50 : 25);
-      const dx2 = dx1 * 1.8 + (Math.random() - 0.5) * 20;
-      const rot1 = (Math.random() - 0.5) * 35;
-      const rot2 = (Math.random() - 0.5) * 60;
-      const duration = isClick ? 0.95 : 0.85;
+        if (this.isCursor) {
+          this.opacity -= this.fadeSpeed;
+          if (this.opacity <= 0.02 || this.y < -30) {
+            this.dead = true;
+          }
+        } else {
+          if (this.y < -30 || this.x < -30 || this.x > width + 30) {
+            this.reset();
+          }
+        }
+      }
 
-      el.style.left = `${x}px`;
-      el.style.top = `${y}px`;
-      el.style.fontSize = `${size}px`;
-      el.style.setProperty('--dx1', `${dx1}px`);
-      el.style.setProperty('--dx2', `${dx2}px`);
-      el.style.setProperty('--rot1', `${rot1}deg`);
-      el.style.setProperty('--rot2', `${rot2}deg`);
-      el.style.animationDuration = `${duration}s`;
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.max(0, Math.min(1, this.opacity));
 
-      container.appendChild(el);
+        if (this.type === 'heart') {
+          const s = this.size * 0.075;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.bezierCurveTo(-10 * s, -10 * s, -20 * s, 5 * s, 0, 20 * s);
+          ctx.bezierCurveTo(20 * s, 5 * s, 10 * s, -10 * s, 0, 0);
+          ctx.fill();
+        } else if (this.type === 'petal') {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size * 0.55, this.size * 0.28, Math.PI / 4, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size * 0.35, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
-      el.addEventListener('animationend', () => el.remove(), { once: true });
-    };
+        ctx.restore();
+      }
+    }
+
+    // Initialize base ambient particles
+    for (let i = 0; i < baseCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Desktop mouse interaction (subtle, romantic pastel trail that blends with the website)
+    const isFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    let lastMouseMove = 0;
 
     const handleMouseMove = (e) => {
       const now = performance.now();
-      // Throttle spawn to every 45ms for a buttery-smooth continuous trail without lag
-      if (now - lastSpawnTime < 45) return;
-      lastSpawnTime = now;
+      // Throttle spawn to every 110ms for a gentle, dreamy trail
+      if (now - lastMouseMove < 110) return;
+      lastMouseMove = now;
 
-      spawnParticle(e.clientX, e.clientY, false);
-    };
-
-    const handleClick = (e) => {
-      // Fun romantic burst of 4 particles on click
-      for (let i = 0; i < 4; i++) {
-        setTimeout(() => {
-          spawnParticle(
-            e.clientX + (Math.random() - 0.5) * 20,
-            e.clientY + (Math.random() - 0.5) * 20,
-            true
-          );
-        }, i * 35);
+      // Keep max particles strictly bounded
+      if (particles.length < baseCount + 16) {
+        particles.push(
+          new Particle(
+            true,
+            e.clientX + (Math.random() - 0.5) * 16,
+            e.clientY + (Math.random() - 0.5) * 16
+          )
+        );
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('click', handleClick, { passive: true });
+    const handleClick = (e) => {
+      // Gentle burst of 3 soft watercolor hearts on click
+      if (particles.length >= baseCount + 20) return;
+      for (let i = 0; i < 3; i++) {
+        particles.push(
+          new Particle(
+            true,
+            e.clientX + (Math.random() - 0.5) * 24,
+            e.clientY + (Math.random() - 0.5) * 24
+          )
+        );
+      }
+    };
+
+    if (isFinePointer && !isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener('click', handleClick, { passive: true });
+    }
+
+    // Pause rendering when tab is hidden to save battery & memory
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isRunning = false;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else {
+        if (!isRunning) {
+          isRunning = true;
+          lastDrawTime = performance.now();
+          animationFrameId = requestAnimationFrame(render);
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    const render = (currentTime) => {
+      if (!isRunning) return;
+
+      animationFrameId = requestAnimationFrame(render);
+
+      // Frame pacing: limit draw rate to target FPS
+      const elapsed = currentTime - lastDrawTime;
+      if (elapsed < FRAME_INTERVAL) return;
+      lastDrawTime = currentTime - (elapsed % FRAME_INTERVAL);
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Update and draw particles, removing dead cursor particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        if (p.dead) {
+          particles.splice(i, 1);
+        } else {
+          p.draw();
+        }
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('click', handleClick);
+      isRunning = false;
+      window.removeEventListener('resize', handleResize);
+      if (isFinePointer && !isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('click', handleClick);
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
-    <>
-      {/* Ambient background drifting romantic particles */}
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none"
-      >
-        {PARTICLES.map((p) => (
-          <span
-            key={p.id}
-            className="absolute block animate-particle-float"
-            style={{
-              left: p.left,
-              bottom: '-40px',
-              animationDuration: `${p.duration}s`,
-              animationDelay: `${p.delay}s`,
-              opacity: p.opacity,
-            }}
-          >
-            {p.type === 'heart' ? (
-              <svg
-                width={p.size}
-                height={p.size}
-                viewBox="0 0 24 24"
-                fill={p.color}
-                className="drop-shadow-xs"
-              >
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
-            ) : p.type === 'petal' ? (
-              <svg
-                width={p.size}
-                height={p.size * 0.7}
-                viewBox="0 0 24 16"
-                fill={p.color}
-              >
-                <ellipse cx="12" cy="8" rx="10" ry="5" transform="rotate(30 12 8)" />
-              </svg>
-            ) : (
-              <svg
-                width={p.size * 0.8}
-                height={p.size * 0.8}
-                viewBox="0 0 24 24"
-                fill={p.color}
-              >
-                <circle cx="12" cy="12" r="6" />
-              </svg>
-            )}
-          </span>
-        ))}
-      </div>
-
-      {/* High-performance desktop mouse cursor trail container */}
-      <div
-        ref={trailContainerRef}
-        aria-hidden="true"
-        className="fixed inset-0 pointer-events-none z-50 overflow-hidden select-none"
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0 opacity-60"
+    />
   );
 }

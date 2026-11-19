@@ -125,54 +125,6 @@
   animation: spinSlow 16s linear infinite;
 }
 
-/* Hardware-accelerated GPU floating romantic particles */
-@keyframes particleFloat {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(14px, -55vh, 0) rotate(14deg);
-  }
-  100% {
-    transform: translate3d(-10px, -120vh, 0) rotate(-14deg);
-  }
-}
-
-.animate-particle-float {
-  animation-name: particleFloat;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: transform;
-}
-
-/* Silky smooth GPU desktop cursor heart trail */
-@keyframes cursorHeartFloat {
-  0% {
-    opacity: 0.95;
-    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.6) rotate(0deg);
-  }
-  30% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate3d(var(--dx1, 0px), -18px, 0) scale(1.2) rotate(var(--rot1, 10deg));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate3d(var(--dx2, 0px), -60px, 0) scale(0.7) rotate(var(--rot2, -15deg));
-  }
-}
-
-.cursor-heart-particle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  line-height: 1;
-  user-select: none;
-  animation-name: cursorHeartFloat;
-  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-  animation-fill-mode: forwards;
-  will-change: transform, opacity;
-  filter: drop-shadow(0 2px 4px rgba(244, 63, 94, 0.35));
-}
 
 /* Custom Paper Texture & Polaroid Shadow */
 .polaroid-card {

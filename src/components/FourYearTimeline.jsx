@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Heart, Sparkles, MapPin, Smile, ArrowRight } from 'lucide-react';
+import { Calendar, Heart, Sparkles, MapPin, Smile, ArrowRight, Camera } from 'lucide-react';
 
 export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
   const [activeYearTab, setActiveYearTab] = useState(1);
@@ -145,6 +145,11 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
                 onClick={() => onSelectPhoto(photo)}
                 className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-rose-100/50 border border-rose-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               >
+                {/* Background placeholder while image loads */}
+                <div className="absolute inset-0 flex items-center justify-center text-rose-300">
+                  <Camera className="w-6 h-6 animate-pulse opacity-60" />
+                </div>
+
                 <img
                   src={photo.src}
                   alt={photo.caption}
@@ -155,7 +160,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
                       e.target.src = photo.src + "?t=" + Date.now();
                     }
                   }}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                  className="relative z-10 w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 sm:p-2.5 text-white">
                   <p className="font-handwriting text-xs sm:text-base leading-snug">
