@@ -21,17 +21,21 @@ export default function FloatingHeartsCanvas() {
     };
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Romantic dreamy watercolor pastel palette (vibrant yet soft)
+    // Romantic dreamy watercolor pastel palette (subtle, airy, and translucent)
     const colors = [
-      'rgba(244, 63, 94, 0.55)',   // rose
-      'rgba(251, 113, 133, 0.50)',  // light rose
-      'rgba(249, 168, 212, 0.55)', // soft pink
-      'rgba(253, 186, 116, 0.45)', // warm peach
-      'rgba(216, 180, 254, 0.45)', // dreamy lavender
+      'rgba(244, 63, 94, 0.38)',   // soft rose
+      'rgba(251, 113, 133, 0.34)', // soft light rose
+      'rgba(249, 168, 212, 0.38)', // soft pink
+      'rgba(253, 186, 116, 0.28)', // soft warm peach
+      'rgba(216, 180, 254, 0.28)', // soft dreamy lavender
     ];
 
-    // Responsive particle count (plenty of visible hearts & petals floating)
-    const count = Math.min(32, Math.max(16, Math.floor(window.innerWidth / 40)));
+    // Sparse, clean particle count so text and photos remain completely clear
+    const isMobile = window.innerWidth < 640;
+    const count = isMobile
+      ? Math.min(7, Math.max(4, Math.floor(window.innerWidth / 65)))
+      : Math.min(13, Math.max(7, Math.floor(window.innerWidth / 95)));
+
     const particles = [];
 
     class Particle {
@@ -39,14 +43,14 @@ export default function FloatingHeartsCanvas() {
         if (isManual) {
           this.x = x ?? Math.random() * width;
           this.y = y ?? height + 20;
-          this.size = Math.random() * 10 + 9;
-          this.speedY = Math.random() * 1.2 + 0.7;
-          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.size = Math.random() * 6 + 7;
+          this.speedY = Math.random() * 0.8 + 0.45;
+          this.speedX = (Math.random() - 0.5) * 0.6;
           this.color = colors[Math.floor(Math.random() * colors.length)];
           this.angle = Math.random() * Math.PI * 2;
-          this.spin = (Math.random() - 0.5) * 0.03;
+          this.spin = (Math.random() - 0.5) * 0.025;
           this.type = Math.random() > 0.4 ? 'heart' : Math.random() > 0.5 ? 'petal' : 'circle';
-          this.opacity = Math.random() * 0.3 + 0.6;
+          this.opacity = Math.random() * 0.2 + 0.45;
         } else {
           this.reset(true);
         }
@@ -55,19 +59,19 @@ export default function FloatingHeartsCanvas() {
       reset(init = false) {
         this.x = Math.random() * width;
         this.y = init ? Math.random() * height : height + 25;
-        this.size = Math.random() * 14 + 10;
-        this.speedY = Math.random() * 0.85 + 0.4;
-        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 7 + 8; // Delicate sizes: 8px to 15px
+        this.speedY = Math.random() * 0.5 + 0.25; // Gentle, tranquil upward drift
+        this.speedX = (Math.random() - 0.5) * 0.35;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.angle = Math.random() * Math.PI * 2;
-        this.spin = (Math.random() - 0.5) * 0.02;
-        this.type = Math.random() > 0.4 ? 'heart' : Math.random() > 0.5 ? 'petal' : 'circle';
-        this.opacity = Math.random() * 0.4 + 0.35;
+        this.spin = (Math.random() - 0.5) * 0.016;
+        this.type = Math.random() > 0.45 ? 'heart' : Math.random() > 0.55 ? 'petal' : 'circle';
+        this.opacity = Math.random() * 0.25 + 0.25; // Translucent so text is 100% readable
       }
 
       update() {
         this.y -= this.speedY;
-        this.x += Math.sin(this.angle) * 0.6 + this.speedX;
+        this.x += Math.sin(this.angle) * 0.45 + this.speedX;
         this.angle += this.spin;
 
         if (this.y < -30 || this.x < -30 || this.x > width + 30) {
@@ -83,7 +87,7 @@ export default function FloatingHeartsCanvas() {
         ctx.globalAlpha = this.opacity;
 
         if (this.type === 'heart') {
-          const s = this.size * 0.08;
+          const s = this.size * 0.075;
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.bezierCurveTo(-10 * s, -10 * s, -20 * s, 5 * s, 0, 20 * s);
@@ -91,11 +95,11 @@ export default function FloatingHeartsCanvas() {
           ctx.fill();
         } else if (this.type === 'petal') {
           ctx.beginPath();
-          ctx.ellipse(0, 0, this.size * 0.6, this.size * 0.3, Math.PI / 4, 0, Math.PI * 2);
+          ctx.ellipse(0, 0, this.size * 0.55, this.size * 0.28, Math.PI / 4, 0, Math.PI * 2);
           ctx.fill();
         } else {
           ctx.beginPath();
-          ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
+          ctx.arc(0, 0, this.size * 0.35, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -103,50 +107,52 @@ export default function FloatingHeartsCanvas() {
       }
     }
 
-    // Populate initial drifting hearts and petals
+    // Populate ambient particles
     for (let i = 0; i < count; i++) {
       particles.push(new Particle());
     }
 
-    // Smooth romantic cursor trail
+    // Smooth, restrained cursor trail on desktop
     let lastMouseTime = 0;
     const handleMouseMove = (e) => {
       const now = performance.now();
-      if (now - lastMouseTime < 65) return;
+      // Throttle spawn to every 95ms for a light, delicate trail
+      if (now - lastMouseTime < 95) return;
       lastMouseTime = now;
 
       const p = new Particle(
         true,
-        e.clientX + (Math.random() - 0.5) * 16,
-        e.clientY + (Math.random() - 0.5) * 16
+        e.clientX + (Math.random() - 0.5) * 14,
+        e.clientY + (Math.random() - 0.5) * 14
       );
       particles.push(p);
 
-      if (particles.length > count + 22) {
+      // Keep maximum total particles strictly bounded so it never clutters
+      if (particles.length > count + 6) {
         particles.shift();
       }
     };
 
-    // Click burst: creates a lovely cluster of floating hearts
+    // Click burst: creates a modest, graceful burst of 2 small hearts
     const handleClick = (e) => {
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 2; i++) {
         const p = new Particle(
           true,
-          e.clientX + (Math.random() - 0.5) * 24,
-          e.clientY + (Math.random() - 0.5) * 24
+          e.clientX + (Math.random() - 0.5) * 18,
+          e.clientY + (Math.random() - 0.5) * 18
         );
-        p.speedY = Math.random() * 1.5 + 0.9;
+        p.speedY = Math.random() * 0.9 + 0.5;
         particles.push(p);
       }
-      if (particles.length > count + 28) {
-        particles.splice(0, particles.length - (count + 28));
+      if (particles.length > count + 8) {
+        particles.splice(0, particles.length - (count + 8));
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('click', handleClick, { passive: true });
 
-    // Handle tab visibility so background tabs don't waste power
+    // Handle tab visibility
     const handleVisibilityChange = () => {
       if (document.hidden) {
         isRunning = false;
@@ -187,7 +193,7 @@ export default function FloatingHeartsCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-80"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-60"
     />
   );
 }
