@@ -21,8 +21,8 @@ export default function LoveLetterSection() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
           <Mail className="w-3.5 h-3.5" /> Surat Dari Hati
         </div>
-        <h2 className="text-2xl sm:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4">
-          Surat Terbuka untuk Nada Tersayang
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+          Surat Terbuka untuk <span className="inline-block whitespace-nowrap">Nada Tersayang</span>
         </h2>
         <p className="text-gray-600 max-w-lg mx-auto text-xs sm:text-base px-2">
           Ada pesan tulus yang ingin Aldy sampaikan setelah 4 tahun perjalanan kita. Buka segel amplop di bawah ini ya:
@@ -71,8 +71,8 @@ export default function LoveLetterSection() {
               <span className="text-[10px] sm:text-xs uppercase tracking-wider font-bold text-rose-500 block mb-0.5">
                 Spesial 4 Tahun Kita • 22 November 2026
               </span>
-              <h3 className="text-lg sm:text-2xl font-romantic font-bold text-gray-900 leading-snug">
-                Untuk Nada, Tempat Pulang Ternyaman Aldy
+              <h3 className="text-base sm:text-2xl font-romantic font-bold text-gray-900 leading-snug">
+                Untuk Nada, Tempat Pulang <span className="inline-block whitespace-nowrap">Ternyaman Aldy</span>
               </h3>
             </div>
             <button

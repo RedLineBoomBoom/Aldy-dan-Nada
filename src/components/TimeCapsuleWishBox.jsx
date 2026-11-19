@@ -69,8 +69,8 @@ export default function TimeCapsuleWishBox() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
           <Hourglass className="w-3.5 h-3.5" /> Menatap Masa Depan
         </div>
-        <h2 className="text-2xl sm:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4">
-          Kapsul Waktu Harapan Kita ⏳
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+          Kapsul Waktu <span className="inline-block whitespace-nowrap">Harapan Kita ⏳</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-xs sm:text-base px-2">
           Tuliskan doa, mimpi, dan harapanmu untuk tahun ke-5 dan seterusnya. Pesan ini akan terkunci di sini dan selalu bisa kita baca bersama!

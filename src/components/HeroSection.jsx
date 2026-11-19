@@ -76,8 +76,8 @@ export default function HeroSection({ featuredPhotos = [] }) {
       </div>
 
       {/* Main Heading */}
-      <h1 className="text-3xl sm:text-6xl md:text-7xl font-romantic font-bold tracking-tight text-gray-900 mb-3 sm:mb-4 max-w-4xl leading-[1.2] px-2">
-        Aldy <span className="text-rose-500 font-normal italic">&amp;</span> Nada
+      <h1 className="text-4xl sm:text-6xl md:text-7xl font-romantic font-bold tracking-tight text-gray-900 mb-3 sm:mb-4 max-w-4xl leading-[1.2] px-2">
+        <span className="inline-block whitespace-nowrap">Aldy <span className="text-rose-500 font-normal italic">&amp;</span> Nada</span>
       </h1>
 
       <p className="text-sm sm:text-lg md:text-xl text-rose-950/70 max-w-2xl font-light mb-6 sm:mb-8 leading-relaxed px-2">

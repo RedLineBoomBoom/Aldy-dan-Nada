@@ -101,8 +101,8 @@ export default function CouplesFunZone() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
           <Sparkles className="w-3.5 h-3.5" /> Zona Manis &amp; Gemas
         </div>
-        <h2 className="text-2xl sm:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4">
-          Spesial Buat Nada Tersenyum
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+          Spesial Buat <span className="inline-block whitespace-nowrap">Nada Tersenyum</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-xs sm:text-base px-2">
           Ada beberapa kupon cinta yang bisa kamu klaim, tes level cinta, dan alasan kenapa kamu selalu jadi orang paling istimewa bagi Aldy!
@@ -115,8 +115,8 @@ export default function CouplesFunZone() {
           <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-rose-500 mb-1 sm:mb-2 block">
             Mini Game Lucu
           </span>
-          <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-2 sm:mb-3">
-            Seberapa Sayang Nada sama Aldy? 💖
+          <h3 className="text-lg sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
+            Seberapa Sayang <span className="inline-block whitespace-nowrap">Nada sama Aldy? 💖</span>
           </h3>
           <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
             Coba geser pengukurnya ke kanan. Hati-hati ya, tombolnya nggak bisa geser ke bawah 50% karena sayangnya Nada pasti banyak banget! 😜
@@ -167,8 +167,8 @@ export default function CouplesFunZone() {
       {/* Part 2: Kupon Cinta 4 Tahun (Interactive Vouchers) */}
       <div className="mb-10 sm:mb-16">
         <div className="text-center mb-6 sm:mb-8">
-          <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2">
-            🎟️ Kupon Cinta Spesial 4 Tahun
+          <h3 className="text-lg sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+            🎟️ Kupon Cinta <span className="inline-block whitespace-nowrap">Spesial 4 Tahun</span>
           </h3>
           <p className="text-xs sm:text-sm text-gray-600 px-2">
             Kupon ini resmi dan bisa Nada gunakan kapan aja ke Aldy. Klik "Klaim Kupon" untuk mengaktifkannya!
@@ -237,8 +237,8 @@ export default function CouplesFunZone() {
       {/* Part 3: 10 Alasan Kenapa Aldy Selalu Sayang Nada */}
       <div>
         <div className="text-center mb-6 sm:mb-10">
-          <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2">
-            10 Alasan Kenapa Aldy Selalu Sayang Nada ❤️
+          <h3 className="text-lg sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+            10 Alasan Kenapa Aldy <span className="inline-block whitespace-nowrap">Selalu Sayang Nada ❤️</span>
           </h3>
           <p className="text-xs sm:text-sm text-gray-600 px-2">
             Dari jutaan alasan yang ada, ini adalah beberapa hal yang selalu bikin Aldy bersyukur punya kamu:

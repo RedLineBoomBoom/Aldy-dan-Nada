@@ -65,8 +65,8 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-3">
           <Calendar className="w-3.5 h-3.5" /> Kilas Balik 4 Tahun
         </div>
-        <h2 className="text-3xl sm:text-5xl font-romantic font-bold text-gray-900 mb-4">
-          Perjalanan Cinta Aldy <span className="text-rose-500 italic">&amp;</span> Nada
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
+          Perjalanan Cinta <span className="inline-block whitespace-nowrap">Aldy <span className="text-rose-500 italic">&amp;</span> Nada</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-sm sm:text-base">
           Setiap babak punya keindahannya sendiri. Klik setiap tahun di bawah untuk membuka kenangan-kenangan manis kita:
@@ -156,9 +156,9 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
                   }}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 text-white">
-                  <p className="font-handwriting text-base leading-tight line-clamp-2">
-                    {photo.caption}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 sm:p-2.5 text-white">
+                  <p className="font-handwriting text-xs sm:text-base leading-snug">
+                    "{photo.caption}"
                   </p>
                 </div>
               </div>

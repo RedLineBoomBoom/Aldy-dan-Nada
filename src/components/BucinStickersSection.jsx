@@ -390,8 +390,8 @@ export default function BucinStickersSection() {
             <Smile className="w-3.5 h-3.5" />
             <span>Koleksi Bucin Gemas</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-romantic font-bold text-gray-900 mb-2">
-            🐼 Animasi Stiker GIF Gemas (Bucin Stickers)
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-romantic font-bold text-gray-900 mb-2 leading-tight">
+            🐼 Animasi Stiker GIF Gemas <span className="inline-block whitespace-nowrap">(Bucin Stickers)</span>
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto">
             Geser stiker favoritmu langsung ke papan kenangan di bawah! Kamu bisa bebas atur posisinya ke mana saja tanpa keluar dari area papan ❤️

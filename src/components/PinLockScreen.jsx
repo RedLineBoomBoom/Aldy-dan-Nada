@@ -102,8 +102,8 @@ export default function PinLockScreen({ onUnlock }) {
         <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-rose-500 block mb-0.5">
           Kotak Rahasia Cinta 💌
         </span>
-        <h2 className="text-lg sm:text-2xl font-romantic font-bold text-gray-900 mb-1">
-          Khusus untuk Nada Tersayang
+        <h2 className="text-lg sm:text-2xl font-romantic font-bold text-gray-900 mb-1 leading-tight">
+          Khusus untuk <span className="inline-block whitespace-nowrap">Nada Tersayang</span>
         </h2>
         <p className="text-[11px] sm:text-xs text-gray-600 mb-4 sm:mb-6 leading-tight">
           Masukkan 8 digit PIN spesial untuk membuka website anniversary kita:

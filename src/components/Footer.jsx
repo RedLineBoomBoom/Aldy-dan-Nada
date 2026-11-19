@@ -27,7 +27,7 @@ export default function Footer({ onLock }) {
         </div>
 
         <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-2 sm:mb-3">
-          Aldy &amp; Nada • Selamanya
+          <span className="inline-block whitespace-nowrap">Aldy &amp; Nada</span> • <span className="inline-block whitespace-nowrap">Selamanya ❤️</span>
         </h3>
 
         <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed mb-6 font-light px-2">

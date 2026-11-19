@@ -143,8 +143,8 @@ export default function WelcomeModal({ onOpenWebsite }) {
         <span className="inline-block text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-rose-500 mb-0.5 sm:mb-1">
           Surat Spesial Dari Aldy
         </span>
-        <h1 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-2 sm:mb-3">
-          Happy 4th Anniversary, Nada! 🌸
+        <h1 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-2 sm:mb-3 leading-tight">
+          Happy 4th Anniversary, <span className="inline-block whitespace-nowrap">Nada! 🌸</span>
         </h1>
         <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4 sm:mb-6 px-1">
           Nggak kerasa udah 4 tahun kita jalan bareng, ngelewatin ratusan cerita, tawa, dan kenangan indah. Ada sesuatu yang spesial buat kamu di sini...

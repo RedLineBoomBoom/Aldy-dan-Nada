@@ -47,8 +47,8 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
           <Camera className="w-3.5 h-3.5" /> Galeri Polaroid Kenangan
         </div>
-        <h2 className="text-2xl sm:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4">
-          Potret Cerita Selama 4 Tahun
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+          Potret Cerita <span className="inline-block whitespace-nowrap">Selama 4 Tahun</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-xs sm:text-base px-2">
           Setiap jepretan kamera menyimpan jutaan rasa sayang. Klik foto mana pun untuk melihat cerita lengkapnya atau berikan cinta ❤️
@@ -145,8 +145,8 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
 
               {/* Caption & Like Row */}
               <div className="px-0.5 flex items-start justify-between gap-1 sm:gap-2">
-                <p className="font-handwriting text-xs sm:text-lg text-gray-800 leading-tight line-clamp-2">
-                  {photo.caption}
+                <p className="font-handwriting text-xs sm:text-base text-gray-800 leading-snug">
+                  "{photo.caption}"
                 </p>
 
                 {/* Love Button */}

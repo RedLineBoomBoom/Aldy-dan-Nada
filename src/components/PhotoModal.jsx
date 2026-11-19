@@ -111,7 +111,7 @@ export default function PhotoModal({ photo, allPhotos = [], likes = {}, onLike, 
             </div>
 
             <h3 className="font-romantic text-lg sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 leading-snug">
-              Momen Manis Aldy &amp; Nada
+              Momen Manis <span className="inline-block whitespace-nowrap">Aldy &amp; Nada</span>
             </h3>
 
             <p className="font-handwriting text-base sm:text-2xl text-rose-800 leading-snug mb-3 sm:mb-6 bg-rose-50/50 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-rose-100">
