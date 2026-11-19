@@ -145,6 +145,35 @@
   will-change: transform;
 }
 
+/* Silky smooth GPU desktop cursor heart trail */
+@keyframes cursorHeartFloat {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate3d(var(--dx1, 0px), -18px, 0) scale(1.2) rotate(var(--rot1, 10deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(var(--dx2, 0px), -60px, 0) scale(0.7) rotate(var(--rot2, -15deg));
+  }
+}
+
+.cursor-heart-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  line-height: 1;
+  user-select: none;
+  animation-name: cursorHeartFloat;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 2px 4px rgba(244, 63, 94, 0.35));
+}
+
 /* Custom Paper Texture & Polaroid Shadow */
 .polaroid-card {
   box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.05);
