@@ -106,12 +106,12 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
             >
               {/* Cute Washi / Masking Tape on Top */}
               <div
-                className={`absolute -top-2 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-4 sm:h-5 rounded-sm backdrop-blur-sm border border-white/50 shadow-sm pointer-events-none ${
+                className={`absolute -top-2 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-4 sm:h-5 rounded-sm border border-white/60 shadow-xs pointer-events-none ${
                   index % 3 === 0
-                    ? 'bg-rose-200/70'
+                    ? 'bg-rose-200/90'
                     : index % 3 === 1
-                    ? 'bg-amber-100/80'
-                    : 'bg-pink-200/70'
+                    ? 'bg-amber-100/95'
+                    : 'bg-pink-200/90'
                 }`}
               />
 
@@ -131,7 +131,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
                 />
 
                 {/* Year tag badge */}
-                <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 px-1.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-medium tracking-wide whitespace-nowrap">
+                <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 px-1.5 py-0.5 rounded-full bg-black/65 border border-white/20 text-white text-[9px] sm:text-[10px] font-medium tracking-wide whitespace-nowrap">
                   Thn {photo.year}
                 </div>
 

@@ -63,7 +63,7 @@ export default function LoveLetterSection() {
         /* Unfolded Letter Parchment */
         <div className="relative bg-[#fffdfa] border border-amber-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-xl sm:shadow-2xl text-left max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-500">
           {/* Subtle vintage texture accent */}
-          <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-5 sm:h-6 bg-rose-200/60 backdrop-blur-sm rounded -rotate-1 border border-white/40 shadow-sm" />
+          <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-5 sm:h-6 bg-rose-200/85 rounded -rotate-1 border border-white/60 shadow-xs" />
 
           {/* Letter Header */}
           <div className="flex items-start justify-between gap-3 border-b border-rose-100 pb-3 sm:pb-4 mb-4 sm:mb-6">

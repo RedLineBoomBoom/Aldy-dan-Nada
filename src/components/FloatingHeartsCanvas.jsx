@@ -41,8 +41,8 @@ export default function FloatingHeartsCanvas() {
     // Mobile vs Desktop particle budgeting
     const isMobile = window.innerWidth < 640;
     const count = isMobile
-      ? Math.min(14, Math.max(8, Math.floor(window.innerWidth / 35)))
-      : Math.min(26, Math.max(16, Math.floor(window.innerWidth / 48)));
+      ? Math.min(10, Math.max(6, Math.floor(window.innerWidth / 45)))
+      : Math.min(18, Math.max(12, Math.floor(window.innerWidth / 55)));
 
     const particles = [];
 
@@ -143,10 +143,27 @@ export default function FloatingHeartsCanvas() {
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
+    // Pause canvas updates during active scrolling to free 100% compositor & GPU resources
+    let isScrolling = false;
+    let scrollTimeout = null;
+
+    const handleScroll = () => {
+      isScrolling = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        lastDrawTime = performance.now();
+      }, 100);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const render = (currentTime) => {
       if (!isRunning) return;
 
       animationFrameId = requestAnimationFrame(render);
+
+      // Skip redrawing while scrolling: freezes current frame in GPU memory, zero jank
+      if (isScrolling) return;
 
       // Frame pacing: limit draw rate to target FPS
       const elapsed = currentTime - lastDrawTime;
@@ -165,6 +182,8 @@ export default function FloatingHeartsCanvas() {
     return () => {
       isRunning = false;
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
       if (!isMobile) window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -174,7 +193,7 @@ export default function FloatingHeartsCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-60"
+      className="fixed inset-0 pointer-events-none z-0 opacity-60 will-change-transform transform-gpu"
     />
   );
 }

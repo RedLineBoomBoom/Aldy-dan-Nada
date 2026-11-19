@@ -140,7 +140,7 @@ export default function OpenWhenLetters() {
             className="relative w-full max-w-lg bg-[#fffdfa] border border-rose-200 rounded-3xl p-6 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 max-h-[90vh] overflow-y-auto no-scrollbar"
           >
             {/* Top Tape decoration */}
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/70 backdrop-blur-sm rounded -rotate-1 border border-white/40 shadow-sm" />
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs" />
 
             {/* Header */}
             <div className="flex items-start justify-between gap-3 border-b border-rose-100 pb-3 mb-5">

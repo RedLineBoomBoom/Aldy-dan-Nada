@@ -419,7 +419,7 @@ export default function BucinStickersSection() {
         {/* Main Grid & Interactive Spotlight */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
           {/* Left / Grid of Stickers (7 cols) */}
-          <div className="lg:col-span-7 bg-white/85 backdrop-blur-md border border-rose-100/90 rounded-3xl p-4 sm:p-6 shadow-xl">
+          <div className="lg:col-span-7 bg-white/95 border border-rose-100/90 rounded-3xl p-4 sm:p-6 shadow-xl">
             <div className="flex items-center justify-between mb-3.5 pb-2.5 border-b border-rose-50">
               <span className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
@@ -476,7 +476,7 @@ export default function BucinStickersSection() {
 
           {/* Right / Interactive Spotlight & Dialogue Card (5 cols) */}
           <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="bg-gradient-to-b from-white to-rose-50/80 backdrop-blur-md border border-rose-200/90 rounded-3xl p-5 sm:p-6 shadow-xl text-center relative overflow-hidden">
+            <div className="bg-gradient-to-b from-white to-rose-50/90 border border-rose-200/90 rounded-3xl p-5 sm:p-6 shadow-xl text-center relative overflow-hidden">
               <div className="absolute -top-12 -right-12 w-32 h-32 bg-pink-300/30 rounded-full blur-2xl pointer-events-none" />
 
               {/* Big Featured Sticker */}
@@ -528,7 +528,7 @@ export default function BucinStickersSection() {
             </div>
 
             {/* Sticker Board Canvas (Tempel Stiker & Bebas Geser) */}
-            <div className="bg-white/90 backdrop-blur-md border border-rose-200/90 rounded-3xl p-4 sm:p-5 shadow-xl">
+            <div className="bg-white/95 border border-rose-200/90 rounded-3xl p-4 sm:p-5 shadow-xl">
               <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-rose-50">
                 <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
                   📌 Papan Stiker Kenangan Nada

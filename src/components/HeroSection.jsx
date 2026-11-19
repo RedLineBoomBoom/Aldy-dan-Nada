@@ -86,7 +86,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
 
       {/* Live Counter Cards */}
       <div className="w-full max-w-3xl grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-8 sm:mb-12">
-        <div className="bg-white/80 backdrop-blur-sm border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
+        <div className="bg-white/95 border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
           <span className="block text-xl sm:text-4xl font-bold font-romantic text-rose-600">
             {timeTogether.years}
           </span>
@@ -95,7 +95,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
           </span>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
+        <div className="bg-white/95 border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
           <span className="block text-xl sm:text-4xl font-bold font-romantic text-rose-600">
             {timeTogether.days.toLocaleString('id-ID')}
           </span>
@@ -104,7 +104,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
           </span>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
+        <div className="bg-white/95 border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
           <span className="block text-xl sm:text-4xl font-bold font-romantic text-rose-600">
             {String(timeTogether.hours).padStart(2, '0')}:{String(timeTogether.minutes).padStart(2, '0')}
           </span>
@@ -113,7 +113,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
           </span>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
+        <div className="bg-white/95 border border-rose-100 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
           <span className="block text-xl sm:text-4xl font-bold font-romantic text-rose-500">
             {String(timeTogether.seconds).padStart(2, '0')}
           </span>
@@ -132,7 +132,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
         {/* Foreground Main Polaroid */}
         <div className="relative bg-white p-3 pb-5 sm:p-4 sm:pb-6 rounded-2xl border border-rose-100 shadow-xl shadow-rose-900/10 transition-all duration-300">
           {/* Masking tape on top */}
-          <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-5 sm:h-6 bg-rose-200/60 backdrop-blur-sm rounded-sm -rotate-1 border border-white/40 shadow-sm pointer-events-none" />
+          <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-5 sm:h-6 bg-rose-200/85 rounded-sm -rotate-1 border border-white/60 shadow-xs pointer-events-none" />
 
           {/* Photo container */}
           <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-rose-50 mb-3 group/img">
@@ -148,7 +148,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
             {/* Click to shuffle badge */}
             <button
               onClick={handleNextPhoto}
-              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 backdrop-blur-sm hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow flex items-center gap-1 transition active:scale-95 cursor-pointer whitespace-nowrap"
+              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow border border-rose-100 flex items-center gap-1 transition active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <RotateCw className="w-3 h-3 shrink-0" />
               <span className="whitespace-nowrap">Ganti ({activePhotoIdx + 1}/{samplePhotos.length})</span>

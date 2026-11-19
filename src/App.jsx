@@ -78,6 +78,25 @@ export default function App() {
     }
   };
 
+  // Programmatic smooth scroll for in-page anchor links without global CSS scroll-behavior jank
+  React.useEffect(() => {
+    const handleAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        if (href && href.length > 1) {
+          const targetElem = document.querySelector(href);
+          if (targetElem) {
+            e.preventDefault();
+            targetElem.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    };
+    document.addEventListener('click', handleAnchorClick);
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, []);
+
   // Filter 5-6 photos with great aspect ratio for hero showcase
   const featuredPhotos = rawPhotos.filter((p) => p.isFeatured).slice(0, 8);
 

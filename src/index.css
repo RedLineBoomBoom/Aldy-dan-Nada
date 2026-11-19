@@ -8,8 +8,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
   body {
     background-color: #fff9fa;
@@ -17,6 +17,8 @@
     font-family: var(--font-sans);
     overflow-x: hidden;
     overscroll-behavior-x: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4 {
     text-wrap: balance;
