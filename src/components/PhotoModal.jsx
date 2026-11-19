@@ -60,6 +60,12 @@ export default function PhotoModal({ photo, allPhotos = [], likes = {}, onLike, 
           <img
             src={photo.src}
             alt={photo.caption}
+            onError={(e) => {
+              if (!e.target.dataset.retried) {
+                e.target.dataset.retried = 'true';
+                e.target.src = photo.src + '?t=' + Date.now();
+              }
+            }}
             className="w-full h-full max-h-[45vh] sm:max-h-[75vh] object-contain"
           />
 

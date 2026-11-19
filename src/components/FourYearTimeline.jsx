@@ -148,9 +148,12 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
                   src={photo.src}
                   alt={photo.caption}
                   loading="lazy"
-                  decoding="async"
-                  width={300}
-                  height={400}
+                  onError={(e) => {
+                    if (!e.target.dataset.retried) {
+                      e.target.dataset.retried = "true";
+                      e.target.src = photo.src + "?t=" + Date.now();
+                    }
+                  }}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 text-white">

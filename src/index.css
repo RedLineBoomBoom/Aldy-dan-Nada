@@ -138,8 +138,7 @@
 
 /* Performance Optimizations for Mobile & Desktop */
 .section-opt {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 750px;
+  contain: layout style;
 }
 
 /* GPU Layer Promotion for silky smooth transitions */
