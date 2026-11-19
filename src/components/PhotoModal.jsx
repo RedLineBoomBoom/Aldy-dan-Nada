@@ -5,18 +5,15 @@ export default function PhotoModal({ photo, allPhotos = [], likes = {}, onLike, 
   // Always define safe close handler that unfreezes scrolling
   const handleClose = useCallback(() => {
     document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
     if (onClose) onClose();
   }, [onClose]);
 
-  // Lock body & html scroll while modal is open, and guaranteed unlock on unmount
+  // Lock body scroll while modal is open, and guaranteed unlock on unmount
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
 
     return () => {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     };
   }, []);
 

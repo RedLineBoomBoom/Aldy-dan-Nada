@@ -60,19 +60,9 @@ export default function WelcomeModal({ onOpenWebsite }) {
   useEffect(() => {
     if (!isDismissed) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-
-      const preventTouch = (e) => {
-        if (!e.target.closest('.modal-content')) {
-          e.preventDefault();
-        }
-      };
-      document.addEventListener('touchmove', preventTouch, { passive: false });
 
       return () => {
         document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        document.removeEventListener('touchmove', preventTouch);
       };
     }
   }, [isDismissed]);
@@ -109,7 +99,6 @@ export default function WelcomeModal({ onOpenWebsite }) {
     setTimeout(() => {
       setIsDismissed(true);
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
       onOpenWebsite();
     }, 700);
   };

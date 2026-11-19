@@ -15,10 +15,8 @@ export default function PinLockScreen({ onUnlock }) {
   // Lock body scroll while PIN screen is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     };
   }, []);
 

@@ -121,7 +121,6 @@ export default function App() {
   const handleClosePhotoModal = () => {
     setSelectedPhoto(null);
     document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
   };
 
   const handleNextPhoto = () => {
@@ -141,7 +140,7 @@ export default function App() {
   // If locked, render PIN protection gate with floating hearts background
   if (!isUnlocked) {
     return (
-      <div className="relative min-h-screen text-[#4a2432] selection:bg-rose-200 selection:text-rose-900 overflow-hidden">
+      <div className="relative min-h-screen text-[#4a2432] selection:bg-rose-200 selection:text-rose-900">
         <FloatingHeartsCanvas />
         <PinLockScreen onUnlock={handleUnlock} />
       </div>
@@ -149,7 +148,7 @@ export default function App() {
   }
 
   return (
-    <div className="relative min-h-screen text-[#4a2432] selection:bg-rose-200 selection:text-rose-900 overflow-x-hidden">
+    <div className="relative min-h-screen text-[#4a2432] selection:bg-rose-200 selection:text-rose-900">
       {/* Interactive Floating Hearts & Petals Canvas */}
       <FloatingHeartsCanvas />
 

@@ -7,16 +7,14 @@
 }
 
 @layer base {
-  html {
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+  html, body {
+    max-width: 100%;
+    overflow-x: clip;
   }
   body {
     background-color: #fff9fa;
     color: #4a2835;
     font-family: var(--font-sans);
-    overflow-x: hidden;
-    overscroll-behavior-x: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -125,6 +123,26 @@
 
 .animate-spin-slow {
   animation: spinSlow 16s linear infinite;
+}
+
+/* Hardware-accelerated GPU floating romantic particles */
+@keyframes particleFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(14px, -55vh, 0) rotate(14deg);
+  }
+  100% {
+    transform: translate3d(-10px, -120vh, 0) rotate(-14deg);
+  }
+}
+
+.animate-particle-float {
+  animation-name: particleFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
 
 /* Custom Paper Texture & Polaroid Shadow */
