@@ -175,6 +175,32 @@ export default function VoiceNotePlayer() {
     setCurrentTime(0);
   };
 
+  const handleSeek = (newTime) => {
+    const target = Math.max(0, Math.min(newTime, duration || 42));
+    setCurrentTime(target);
+    if (audioRef.current) {
+      audioRef.current.currentTime = target;
+    }
+  };
+
+  const handleReplay = () => {
+    handleSeek(0);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(true));
+    } else {
+      setIsPlaying(true);
+    }
+  };
+
+  const handleRewind = (seconds = 5) => {
+    handleSeek(currentTime - seconds);
+  };
+
+  const handleForward = (seconds = 5) => {
+    handleSeek(currentTime + seconds);
+  };
+
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
@@ -256,23 +282,71 @@ export default function VoiceNotePlayer() {
 
         {/* Player Controls & Scrubber */}
         <div className="space-y-4 mb-6">
-          {/* Progress Bar */}
-          <div className="space-y-1.5">
-            <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden border border-rose-900/50 cursor-pointer">
+          {/* Interactive Draggable & Clickable Seek Bar */}
+          <div className="space-y-1.5 select-none">
+            <div className="relative group w-full py-2.5 flex items-center cursor-pointer">
+              {/* Native range input on top for 100% reliable click, drag & touch on mobile & desktop */}
+              <input
+                type="range"
+                min="0"
+                max={duration || 42}
+                step="0.1"
+                value={Math.min(currentTime, duration || 42)}
+                onChange={(e) => handleSeek(parseFloat(e.target.value))}
+                className="absolute inset-0 w-full h-full opacity-0 z-30 cursor-pointer"
+                title="Geser atau klik untuk memajukan / mengulang audio"
+              />
+
+              {/* Background Track */}
+              <div className="w-full h-2.5 bg-black/60 rounded-full overflow-hidden border border-rose-900/50 relative">
+                <div
+                  className="h-full bg-gradient-to-r from-rose-500 via-pink-400 to-amber-300 rounded-full transition-all"
+                  style={{ width: `${Math.min(100, (currentTime / (duration || 42)) * 100)}%` }}
+                />
+              </div>
+
+              {/* Custom Thumb handle */}
               <div
-                className="h-full bg-gradient-to-r from-rose-500 via-pink-400 to-amber-300 rounded-full transition-all duration-200"
-                style={{ width: `${(currentTime / (duration || 1)) * 100}%` }}
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full shadow-lg shadow-rose-500/60 border-2 border-rose-500 pointer-events-none group-hover:scale-125 transition-transform z-20"
+                style={{ left: `${Math.min(100, Math.max(0, (currentTime / (duration || 42)) * 100))}%` }}
               />
             </div>
-            <div className="flex justify-between text-xs font-mono text-rose-300/70">
+
+            {/* Time labels & hint */}
+            <div className="flex justify-between items-center text-xs font-mono text-rose-300/80 px-0.5">
               <span>{formatTime(currentTime)}</span>
+              <span className="text-[10px] sm:text-[11px] text-rose-400/70 font-sans tracking-wide">
+                Geser / klik garis untuk mengulang ↺
+              </span>
               <span>{formatTime(duration)}</span>
             </div>
           </div>
 
-          {/* Main Play Button */}
-          <div className="flex items-center justify-center gap-4">
+          {/* Control Buttons Row: Replay, Rewind, Play/Pause, Forward */}
+          <div className="flex items-center justify-center gap-3 sm:gap-6 pt-1">
+            {/* Replay from Start Button */}
             <button
+              type="button"
+              onClick={handleReplay}
+              className="p-2.5 sm:p-3 rounded-full bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white transition active:scale-90 cursor-pointer flex items-center justify-center"
+              title="Ulang dari awal"
+            >
+              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+
+            {/* Rewind 5s Button */}
+            <button
+              type="button"
+              onClick={() => handleRewind(5)}
+              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white text-xs font-mono font-bold transition active:scale-90 cursor-pointer"
+              title="Mundur 5 detik"
+            >
+              -5s
+            </button>
+
+            {/* Main Play/Pause Button */}
+            <button
+              type="button"
               onClick={togglePlay}
               className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 hover:from-rose-500 hover:to-pink-400 text-white flex items-center justify-center shadow-lg shadow-rose-600/40 hover:scale-105 active:scale-95 transition cursor-pointer"
               title={isPlaying ? 'Jeda' : 'Putar Pesan Suara'}
@@ -282,6 +356,16 @@ export default function VoiceNotePlayer() {
               ) : (
                 <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white ml-0.5" />
               )}
+            </button>
+
+            {/* Forward 5s Button */}
+            <button
+              type="button"
+              onClick={() => handleForward(5)}
+              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white text-xs font-mono font-bold transition active:scale-90 cursor-pointer"
+              title="Maju 5 detik"
+            >
+              +5s
             </button>
           </div>
         </div>
