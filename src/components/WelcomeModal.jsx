@@ -6,6 +6,8 @@ export default function WelcomeModal({ onOpenWebsite }) {
   const [isDismissed, setIsDismissed] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [hasCelebrated, setHasCelebrated] = useState(false);
+  // Dedicated celebration mode state (persists permanently, never overwritten by 1s interval)
+  const [forceCelebrated, setForceCelebrated] = useState(false);
 
   // Check if running on local environment
   const isLocalHost = typeof window !== 'undefined' && (
@@ -28,6 +30,9 @@ export default function WelcomeModal({ onOpenWebsite }) {
     seconds: 0,
     isPast: false,
   });
+
+  // Effective celebration state: true if naturally reached or explicitly tested/celebrated
+  const isCelebrationTime = forceCelebrated || timeLeft.isPast;
 
   // Play celebration audio fanfare/chime
   const playCelebrationChime = () => {
@@ -103,7 +108,7 @@ export default function WelcomeModal({ onOpenWebsite }) {
   };
 
   const handleTriggerCelebration = () => {
-    setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true });
+    setForceCelebrated(true);
     setPreviewLockedOnLocal(false);
     fireCelebrationFireworks();
     playCelebrationChime();
@@ -136,11 +141,14 @@ export default function WelcomeModal({ onOpenWebsite }) {
   }, [targetDate, hasCelebrated]);
 
   // Is the button currently locked?
+  // - If celebration is active: ALWAYS UNLOCKED!
   // - If run on local: UNLOCKED by default (unless previewLockedOnLocal is clicked)
-  // - If online/production: LOCKED until countdown reaches 0 on 22 November 2026
-  const isLocked = isLocalHost
-    ? previewLockedOnLocal && !timeLeft.isPast
-    : !timeLeft.isPast;
+  // - If online/production: LOCKED until celebration arrives on 22 November 2026
+  const isLocked = isCelebrationTime
+    ? false
+    : isLocalHost
+    ? previewLockedOnLocal
+    : true;
 
   // Disable scrolling on body while WelcomeModal is active
   useEffect(() => {
@@ -209,14 +217,14 @@ export default function WelcomeModal({ onOpenWebsite }) {
           onClick={handleTriggerCelebration}
           title={isLocked ? 'Klik untuk uji perayaan' : 'Selamat 4 Tahun!'}
           className={`relative mx-auto w-12 h-12 sm:w-16 sm:h-16 mb-2.5 sm:mb-3 flex items-center justify-center rounded-2xl shadow-lg transition-all duration-500 shrink-0 cursor-pointer ${
-            timeLeft.isPast
+            isCelebrationTime
               ? 'bg-gradient-to-tr from-amber-500 via-rose-500 to-pink-500 shadow-amber-500/30 scale-105 animate-bounce-slow'
               : 'bg-gradient-to-tr from-rose-500 to-pink-400 shadow-rose-500/25 animate-float-slow'
           }`}
         >
           {isLocked ? (
             <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-white animate-pulse" />
-          ) : timeLeft.isPast ? (
+          ) : isCelebrationTime ? (
             <PartyPopper className="w-6 h-6 sm:w-8 sm:h-8 text-white animate-pulse" />
           ) : (
             <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white animate-heart-beat" />
@@ -224,27 +232,27 @@ export default function WelcomeModal({ onOpenWebsite }) {
           <div className="absolute -top-1.5 -right-2.5 bg-amber-400 text-amber-950 text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full font-bold shadow-md flex items-center gap-1 whitespace-nowrap select-none pointer-events-none z-20">
             <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-950 shrink-0" />
             <span className="whitespace-nowrap font-bold">
-              {timeLeft.isPast ? '🎉 4 Tahun!' : '4 Tahun!'}
+              {isCelebrationTime ? '🎉 4 Tahun!' : '4 Tahun!'}
             </span>
           </div>
         </div>
 
         {/* Romantic greeting text */}
         <span className="inline-block text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-rose-500 mb-0.5 whitespace-nowrap">
-          {timeLeft.isPast ? '🎉 HARI INI RESMI 4 TAHUN! 🎉' : 'Surat Spesial Dari Aldy'}
+          {isCelebrationTime ? '🎉 HARI INI RESMI 4 TAHUN! 🎉' : 'Surat Spesial Dari Aldy'}
         </span>
         <h1 className="text-base sm:text-2xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
           <span className="inline-block whitespace-nowrap">Happy 4th Anniversary,</span>{' '}
           <span className="inline-block whitespace-nowrap">Nada! 🌸</span>
         </h1>
         <p className="text-[11px] sm:text-sm text-gray-600 leading-relaxed mb-2.5 sm:mb-4 px-1">
-          {timeLeft.isPast
+          {isCelebrationTime
             ? 'Waktu yang kita tunggu-tunggu akhirnya tiba! Tepat hari ini, 22 November 2026, genap sudah 4 tahun (1.461 hari) kita berjalan bersama. Ada kenangan indah dan pesan cinta yang siap kamu buka sekarang... 💖'
             : 'Nggak kerasa udah 4 tahun kita jalan bareng, ngelewatin ratusan cerita, tawa, dan kenangan indah. Ada sesuatu yang spesial buat kamu di sini...'}
         </p>
 
         {/* Live Countdown Box OR Grand Celebration Banner */}
-        {!timeLeft.isPast ? (
+        {!isCelebrationTime ? (
           <div className="bg-rose-50/90 border border-rose-200/80 rounded-2xl p-2 sm:p-3.5 mb-2.5 sm:mb-3.5 text-center">
             <div className="flex items-center justify-center gap-1.5 text-[9.5px] sm:text-[11px] font-bold text-rose-600 uppercase tracking-wider mb-1 sm:mb-2 whitespace-nowrap">
               <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
@@ -295,13 +303,13 @@ export default function WelcomeModal({ onOpenWebsite }) {
             )}
           </div>
         ) : (
-          /* Festive Celebration Banner When Countdown Finishes */
-          <div className="bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-pink-500/15 border-2 border-amber-300 rounded-2xl p-3 sm:p-4 mb-2.5 sm:mb-3.5 text-center shadow-lg shadow-amber-500/15 animate-pulse">
-            <div className="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold text-amber-800 uppercase tracking-wider mb-1">
-              <PartyPopper className="w-4 h-4 text-amber-600" />
+          /* Festive Celebration Banner When Countdown Finishes - Completely steady and easy to read */
+          <div className="relative bg-gradient-to-br from-amber-50/95 via-rose-50/95 to-pink-50/95 border-2 border-amber-400 rounded-2xl p-3.5 sm:p-4 mb-2.5 sm:mb-3.5 text-center shadow-xl shadow-amber-500/15">
+            <div className="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-extrabold text-amber-900 uppercase tracking-wide mb-1.5">
+              <PartyPopper className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0" />
               <span>Countdown Selesai • Waktunya Merayakan! 🥳</span>
             </div>
-            <p className="text-xs sm:text-[13px] font-medium text-rose-950/85 leading-relaxed">
+            <p className="text-xs sm:text-[13px] font-medium text-rose-950/90 leading-relaxed px-1">
               Kunci kenangan telah terbuka seutuhnya! Semua cerita, foto, dan pesan cinta dari Aldy siap untuk kamu jelajahi sekarang. ✨
             </p>
           </div>
@@ -328,7 +336,7 @@ export default function WelcomeModal({ onOpenWebsite }) {
           >
             <PartyPopper className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-200 shrink-0" />
             <span className="font-bold tracking-wide whitespace-nowrap">
-              {timeLeft.isPast ? '🎉 Masuk ke Perayaan 4 Tahun Kita 🌸' : 'Buka Kenangan Kita & Putar Lagu'}
+              {isCelebrationTime ? '🎉 Masuk ke Perayaan 4 Tahun Kita 🌸' : 'Buka Kenangan Kita & Putar Lagu'}
             </span>
             <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white shrink-0" />
           </button>
@@ -338,26 +346,40 @@ export default function WelcomeModal({ onOpenWebsite }) {
         {isLocalHost && (
           <div className="mt-2.5 pt-2 border-t border-rose-100 flex items-center justify-between text-[9.5px] text-gray-400 gap-1 flex-wrap">
             <span className="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-semibold border border-emerald-200 whitespace-nowrap">
-              🛠️ Mode Local ({isLocked ? 'Terkunci' : 'Terbuka'})
+              🛠️ Mode Local ({isCelebrationTime ? 'Perayaan Aktif' : isLocked ? 'Terkunci' : 'Hitung Mundur'})
             </span>
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleTriggerCelebration}
-                className="text-amber-700 hover:text-amber-800 font-bold hover:underline cursor-pointer whitespace-nowrap bg-amber-100 px-2 py-0.5 rounded border border-amber-300 shadow-xs"
-                title="Ledakkan kembang api, bunyi lonceng perayaan, dan buka mode selesai countdown"
-              >
-                🎉 Tes Efek Perayaan
-              </button>
+              {isCelebrationTime ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setForceCelebrated(false);
+                    setPreviewLockedOnLocal(false);
+                  }}
+                  className="text-rose-600 hover:text-rose-700 hover:underline cursor-pointer font-bold whitespace-nowrap bg-rose-50 px-2 py-0.5 rounded border border-rose-200 shadow-xs"
+                  title="Kembalikan tampilan ke hitung mundur / countdown"
+                >
+                  ↺ Kembali ke Countdown
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleTriggerCelebration}
+                  className="text-amber-800 hover:text-amber-900 font-bold hover:underline cursor-pointer whitespace-nowrap bg-amber-100 px-2 py-0.5 rounded border border-amber-300 shadow-xs"
+                  title="Ledakkan kembang api, bunyi lonceng perayaan, dan buka mode selesai countdown"
+                >
+                  🎉 Tes Efek Perayaan
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
-                  setTimeLeft((prev) => ({ ...prev, isPast: !prev.isPast }));
+                  setForceCelebrated(false);
                   setPreviewLockedOnLocal(!previewLockedOnLocal);
                 }}
-                className="text-rose-500 hover:underline cursor-pointer font-medium whitespace-nowrap"
+                className="text-gray-500 hover:underline cursor-pointer font-medium whitespace-nowrap"
               >
-                {isLocked ? 'Buka Kunci' : 'Kunci Ulang'}
+                {previewLockedOnLocal ? 'Buka Kunci' : 'Kunci Ulang'}
               </button>
             </div>
           </div>
