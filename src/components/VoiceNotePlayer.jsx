@@ -1,34 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Mic, Upload, Volume2, RotateCcw, Heart, Sparkles, Check, Disc3 } from 'lucide-react';
+import { Play, Pause, Mic, Disc3 } from 'lucide-react';
 
 export default function VoiceNotePlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(163); // default 163s (~2m 43s)
-  const [audioUrl, setAudioUrl] = useState(() => {
-    try {
-      return localStorage.getItem('anniversary_custom_voicenote') || '/voicenote.mp3';
-    } catch {
-      return '/voicenote.mp3';
-    }
-  });
-
-  const [hasCustomVN, setHasCustomVN] = useState(() => {
-    try {
-      return !!localStorage.getItem('anniversary_custom_voicenote');
-    } catch {
-      return false;
-    }
-  });
-
-  const [showRecorder, setShowRecorder] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordingTime, setRecordingTime] = useState(0);
+  const audioUrl = '/voicenote.mp3';
 
   const audioRef = useRef(null);
-  const mediaRecorderRef = useRef(null);
-  const audioChunksRef = useRef([]);
-  const recordingTimerRef = useRef(null);
 
   // Sync time & events with audio element
   useEffect(() => {
@@ -133,85 +112,6 @@ export default function VoiceNotePlayer() {
     }
     return () => clearInterval(timer);
   }, [isPlaying, duration]);
-
-  // Handle file upload
-  const handleFileUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64Audio = event.target?.result;
-      if (base64Audio) {
-        setAudioUrl(base64Audio);
-        setHasCustomVN(true);
-        try {
-          localStorage.setItem('anniversary_custom_voicenote', base64Audio);
-        } catch {}
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
-  // Handle Voice Recording via Browser Microphone
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorderRef.current = new MediaRecorder(stream);
-      audioChunksRef.current = [];
-
-      mediaRecorderRef.current.ondataavailable = (e) => {
-        if (e.data.size > 0) {
-          audioChunksRef.current.push(e.data);
-        }
-      };
-
-      mediaRecorderRef.current.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/mp3' });
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64Audio = reader.result;
-          setAudioUrl(base64Audio);
-          setHasCustomVN(true);
-          try {
-            localStorage.setItem('anniversary_custom_voicenote', base64Audio);
-          } catch {}
-        };
-        reader.readAsDataURL(audioBlob);
-
-        // Stop all tracks
-        stream.getTracks().forEach((track) => track.stop());
-      };
-
-      mediaRecorderRef.current.start();
-      setIsRecording(true);
-      setRecordingTime(0);
-
-      recordingTimerRef.current = setInterval(() => {
-        setRecordingTime((prev) => prev + 1);
-      }, 1000);
-    } catch (err) {
-      alert('Tidak dapat mengakses mikrofon. Pastikan izin mikrofon telah diberikan di browser!');
-    }
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-      if (recordingTimerRef.current) clearInterval(recordingTimerRef.current);
-    }
-  };
-
-  const handleResetVN = () => {
-    try {
-      localStorage.removeItem('anniversary_custom_voicenote');
-    } catch {}
-    setAudioUrl('/voicenote.mp3');
-    setHasCustomVN(false);
-    setIsPlaying(false);
-    setCurrentTime(0);
-  };
 
   const handleSeek = (newTime) => {
     const target = Math.max(0, Math.min(newTime, duration || 163));
@@ -355,69 +255,6 @@ export default function VoiceNotePlayer() {
             </button>
           </div>
         </div>
-
-        {/* Bottom Drawer Toggle (Ganti / Rekam VN Sendiri) */}
-        <div className="mt-5 pt-4 border-t border-rose-900/30 flex items-center justify-between text-xs text-rose-300/70">
-          <button
-            onClick={() => setShowRecorder(!showRecorder)}
-            className="hover:text-amber-300 flex items-center gap-1.5 transition cursor-pointer"
-          >
-            <Mic className="w-3.5 h-3.5" />
-            <span>{showRecorder ? 'Tutup Pengaturan Rekaman' : 'Ganti / Rekam Voice Note Sendiri'}</span>
-          </button>
-
-          {hasCustomVN && (
-            <button
-              onClick={handleResetVN}
-              className="hover:text-rose-400 flex items-center gap-1 transition cursor-pointer text-[11px]"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset Suara</span>
-            </button>
-          )}
-        </div>
-
-        {/* Custom Record / Upload Panel */}
-        {showRecorder && (
-          <div className="mt-4 p-4 rounded-2xl bg-black/50 border border-rose-800/40 space-y-3">
-            <p className="text-xs text-rose-200">
-              Aldy bisa merekam suara langsung melalui mikrofon HP/laptop atau mengunggah file audio rekaman (.mp3 / .m4a):
-            </p>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {!isRecording ? (
-                <button
-                  type="button"
-                  onClick={startRecording}
-                  className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5 transition active:scale-95 cursor-pointer"
-                >
-                  <Mic className="w-3.5 h-3.5" />
-                  <span>Mulai Rekam Suara</span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={stopRecording}
-                  className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold flex items-center gap-1.5 animate-pulse transition active:scale-95 cursor-pointer"
-                >
-                  <span className="w-2.5 h-2.5 rounded-xs bg-white" />
-                  <span>Selesai Rekam ({recordingTime}s)</span>
-                </button>
-              )}
-
-              <label className="px-4 py-2 rounded-xl bg-rose-950/80 hover:bg-rose-900/80 border border-rose-700/50 text-rose-200 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer">
-                <Upload className="w-3.5 h-3.5" />
-                <span>Unggah File Audio</span>
-                <input
-                  type="file"
-                  accept="audio/*"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-              </label>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
