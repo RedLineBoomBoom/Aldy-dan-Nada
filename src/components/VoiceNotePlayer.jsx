@@ -183,24 +183,6 @@ export default function VoiceNotePlayer() {
     }
   };
 
-  const handleReplay = () => {
-    handleSeek(0);
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(true));
-    } else {
-      setIsPlaying(true);
-    }
-  };
-
-  const handleRewind = (seconds = 5) => {
-    handleSeek(currentTime - seconds);
-  };
-
-  const handleForward = (seconds = 5) => {
-    handleSeek(currentTime + seconds);
-  };
-
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
@@ -312,39 +294,15 @@ export default function VoiceNotePlayer() {
               />
             </div>
 
-            {/* Time labels & hint */}
+            {/* Time labels */}
             <div className="flex justify-between items-center text-xs font-mono text-rose-300/80 px-0.5">
               <span>{formatTime(currentTime)}</span>
-              <span className="text-[10px] sm:text-[11px] text-rose-400/70 font-sans tracking-wide">
-                Geser / klik garis untuk mengulang ↺
-              </span>
               <span>{formatTime(duration)}</span>
             </div>
           </div>
 
-          {/* Control Buttons Row: Replay, Rewind, Play/Pause, Forward */}
-          <div className="flex items-center justify-center gap-3 sm:gap-6 pt-1">
-            {/* Replay from Start Button */}
-            <button
-              type="button"
-              onClick={handleReplay}
-              className="p-2.5 sm:p-3 rounded-full bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white transition active:scale-90 cursor-pointer flex items-center justify-center"
-              title="Ulang dari awal"
-            >
-              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-
-            {/* Rewind 5s Button */}
-            <button
-              type="button"
-              onClick={() => handleRewind(5)}
-              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white text-xs font-mono font-bold transition active:scale-90 cursor-pointer"
-              title="Mundur 5 detik"
-            >
-              -5s
-            </button>
-
-            {/* Main Play/Pause Button */}
+          {/* Main Play/Pause Button */}
+          <div className="flex items-center justify-center pt-1">
             <button
               type="button"
               onClick={togglePlay}
@@ -357,24 +315,7 @@ export default function VoiceNotePlayer() {
                 <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white ml-0.5" />
               )}
             </button>
-
-            {/* Forward 5s Button */}
-            <button
-              type="button"
-              onClick={() => handleForward(5)}
-              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-rose-950/70 hover:bg-rose-900/90 text-rose-300 border border-rose-800/50 hover:text-white text-xs font-mono font-bold transition active:scale-90 cursor-pointer"
-              title="Maju 5 detik"
-            >
-              +5s
-            </button>
           </div>
-        </div>
-
-        {/* Transcription / Romantic Message Preview */}
-        <div className="bg-black/35 rounded-2xl p-4 border border-rose-900/30 text-center">
-          <p className="font-handwriting text-sm sm:text-lg text-rose-100/90 leading-relaxed italic">
-            "Hai sayang... Selamat 4 tahun perjalanan cinta kita. Terima kasih ya sudah selalu ada di samping Aldy, jadi alasan Aldy selalu tersenyum setiap hari. Aldy sayang banget sama Nada... ❤️"
-          </p>
         </div>
 
         {/* Bottom Drawer Toggle (Ganti / Rekam VN Sendiri) */}
