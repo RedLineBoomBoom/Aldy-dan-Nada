@@ -68,20 +68,20 @@ export default function HeroSection({ featuredPhotos = [] }) {
       {/* Soft romantic backdrop blurs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-tr from-rose-200/40 via-pink-100/30 to-amber-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      {/* Decorative Background Couple Cutouts (50% Opacity) */}
-      <div className="hidden md:block absolute -left-8 lg:left-2 xl:left-8 2xl:left-14 bottom-4 lg:bottom-8 w-44 md:w-52 lg:w-64 xl:w-76 2xl:w-84 pointer-events-none select-none z-0 transition-opacity duration-700">
+      {/* Decorative Background Couple Cutouts (50% Opacity, Enlarged, Edge-Anchored & Aesthetically Tilted) */}
+      <div className="hidden md:block absolute left-0 md:-left-4 lg:-left-6 xl:-left-8 2xl:-left-10 bottom-0 w-60 md:w-72 lg:w-88 xl:w-[420px] 2xl:w-[480px] pointer-events-none select-none z-0 transition-all duration-700">
         <img
           src="/bg_couple_left.png"
-          alt="Aldy &amp; Nada"
-          className="w-full h-auto object-contain opacity-50 drop-shadow-sm transform -rotate-2"
+          alt="Aldy &amp; Nada - Kenangan Manis"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform -rotate-4 lg:-rotate-6 origin-bottom-left"
         />
       </div>
 
-      <div className="hidden md:block absolute -right-8 lg:right-2 xl:right-8 2xl:right-14 bottom-4 lg:bottom-8 w-44 md:w-52 lg:w-64 xl:w-76 2xl:w-84 pointer-events-none select-none z-0 transition-opacity duration-700">
+      <div className="hidden md:block absolute right-0 md:-right-4 lg:-right-6 xl:-right-8 2xl:-right-10 bottom-0 w-60 md:w-72 lg:w-88 xl:w-[420px] 2xl:w-[480px] pointer-events-none select-none z-0 transition-all duration-700">
         <img
           src="/bg_couple_right.png"
-          alt="Aldy &amp; Nada"
-          className="w-full h-auto object-contain opacity-50 drop-shadow-sm transform rotate-2"
+          alt="Aldy &amp; Nada - Momen Berdua"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform rotate-4 lg:rotate-6 origin-bottom-right"
         />
       </div>
 
