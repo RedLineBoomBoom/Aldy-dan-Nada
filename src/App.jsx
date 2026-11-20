@@ -8,7 +8,6 @@ import HeroSection from './components/HeroSection';
 import FourYearTimeline from './components/FourYearTimeline';
 import InteractivePolaroidWall from './components/InteractivePolaroidWall';
 import LoveLetterSection from './components/LoveLetterSection';
-import MidnightSecretLetterModal from './components/MidnightSecretLetterModal';
 import OpenWhenLetters from './components/OpenWhenLetters';
 import CouplesFunZone from './components/CouplesFunZone';
 import BucinStickersSection from './components/BucinStickersSection';
@@ -188,9 +187,8 @@ export default function App() {
         {/* Pesan Suara Khusus Dari Aldy (Vintage Cassette Voice Note Player) */}
         <VoiceNotePlayer />
 
-        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) & Surat Rahasia Hari H */}
+        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) */}
         <LoveLetterSection />
-        <MidnightSecretLetterModal />
 
         {/* Kotak Surat "Open When..." (Buka saat kangen, capek, kesel, semangat) */}
         <OpenWhenLetters />
