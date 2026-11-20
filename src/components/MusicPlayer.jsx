@@ -86,6 +86,10 @@ export default function MusicPlayer({ autoPlayTrigger }) {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
+  // Persist exact playback position to prevent song restarting from 0:00
+  const currentAudioTimeRef = useRef(0);
+  const currentYtTimeRef = useRef(0);
+
   const startPlayRef = useRef(null);
   const pausePlayRef = useRef(null);
 
@@ -243,17 +247,45 @@ export default function MusicPlayer({ autoPlayTrigger }) {
     }
   }, [autoPlayTrigger]);
 
-  const startPlay = () => {
+  const startPlay = (explicitTime = null) => {
     setIsPlaying(true);
     // Notify any other audio players (like voice notes) that background music has started
     window.dispatchEvent(new CustomEvent('anniversary_music_play'));
+
     if (activeSource === 'youtube' && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === 'function') {
       if (audioRef.current) audioRef.current.pause();
+      const seekYt = explicitTime !== null ? explicitTime : currentYtTimeRef.current;
+      if (seekYt > 0 && typeof ytPlayerRef.current.seekTo === 'function') {
+        try {
+          ytPlayerRef.current.seekTo(seekYt, true);
+        } catch {}
+      }
       ytPlayerRef.current.playVideo();
     } else if (audioRef.current) {
-      audioRef.current.play().catch(() => {
-        romanticMusicBox.play();
-      });
+      const targetTime = explicitTime !== null ? explicitTime : currentAudioTimeRef.current;
+
+      // Restore exact playback position so song does not restart from 0:00
+      if (targetTime > 0 && Number.isFinite(targetTime)) {
+        try {
+          audioRef.current.currentTime = targetTime;
+        } catch (err) {
+          console.warn('Could not set currentTime before play:', err);
+        }
+      }
+
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Guard against browser buffer eviction resetting currentTime to 0 on play()
+          if (targetTime > 0 && audioRef.current && audioRef.current.currentTime < 1 && targetTime >= 1) {
+            try {
+              audioRef.current.currentTime = targetTime;
+            } catch {}
+          }
+        }).catch(() => {
+          romanticMusicBox.play();
+        });
+      }
     } else {
       romanticMusicBox.play();
     }
@@ -262,9 +294,16 @@ export default function MusicPlayer({ autoPlayTrigger }) {
   const pausePlay = () => {
     setIsPlaying(false);
     if (activeSource === 'youtube' && ytPlayerRef.current && typeof ytPlayerRef.current.pauseVideo === 'function') {
+      try {
+        const ytSecs = ytPlayerRef.current.getCurrentTime();
+        if (ytSecs && ytSecs > 0) currentYtTimeRef.current = ytSecs;
+      } catch {}
       ytPlayerRef.current.pauseVideo();
     }
     if (audioRef.current) {
+      if (audioRef.current.currentTime > 0) {
+        currentAudioTimeRef.current = audioRef.current.currentTime;
+      }
       audioRef.current.pause();
     }
     romanticMusicBox.pause();
@@ -273,19 +312,31 @@ export default function MusicPlayer({ autoPlayTrigger }) {
   startPlayRef.current = startPlay;
   pausePlayRef.current = pausePlay;
 
-  // Auto-pause background music when Aldy's Voice Note plays, auto-resume when it ends/pauses
+  // Auto-pause background music when Aldy's Voice Note plays, auto-resume from exact second
   useEffect(() => {
     const handleVoiceNoteState = (e) => {
       const isVNPlaying = !!e.detail?.isPlaying;
       if (isVNPlaying) {
         if (isPlayingRef.current) {
           wasPlayingBeforeVNRef.current = true;
+          // Capture exact current time immediately before pausing
+          if (audioRef.current && audioRef.current.currentTime > 0) {
+            currentAudioTimeRef.current = audioRef.current.currentTime;
+          }
+          if (activeSource === 'youtube' && ytPlayerRef.current && typeof ytPlayerRef.current.getCurrentTime === 'function') {
+            try {
+              const ytSecs = ytPlayerRef.current.getCurrentTime();
+              if (ytSecs > 0) currentYtTimeRef.current = ytSecs;
+            } catch {}
+          }
           pausePlayRef.current?.();
         }
       } else {
         if (wasPlayingBeforeVNRef.current) {
           wasPlayingBeforeVNRef.current = false;
-          startPlayRef.current?.();
+          // Resume from the exact saved second
+          const resumeTime = currentAudioTimeRef.current;
+          startPlayRef.current?.(resumeTime);
         }
       }
     };
@@ -294,7 +345,7 @@ export default function MusicPlayer({ autoPlayTrigger }) {
     return () => {
       window.removeEventListener('anniversary_voicenote_state', handleVoiceNoteState);
     };
-  }, []);
+  }, [activeSource]);
 
   const togglePlay = () => {
     resetHideTimer();
@@ -335,6 +386,7 @@ export default function MusicPlayer({ autoPlayTrigger }) {
       setIsLoadingYoutube(false);
     }
 
+    currentYtTimeRef.current = 0;
     setYoutubeVideoId(vidId);
     setActiveSource('youtube');
     setCurrentTrackTitle(resolvedTitle);
@@ -376,6 +428,7 @@ export default function MusicPlayer({ autoPlayTrigger }) {
     if (file) {
       const url = URL.createObjectURL(file);
       const title = file.name.replace(/\.[^/.]+$/, '');
+      currentAudioTimeRef.current = 0;
       setCustomAudioUrl(url);
       setCurrentTrackTitle(title);
       setActiveSource('mp3');
@@ -411,6 +464,8 @@ export default function MusicPlayer({ autoPlayTrigger }) {
       ytPlayerRef.current.pauseVideo();
     }
 
+    currentAudioTimeRef.current = 0;
+    currentYtTimeRef.current = 0;
     setActiveSource('local');
     setCustomAudioUrl('/music.mp3');
     setCurrentTrackTitle("Perhaps Love (사랑인가요) ❤️");
@@ -449,6 +504,18 @@ export default function MusicPlayer({ autoPlayTrigger }) {
         src={customAudioUrl}
         loop
         preload="auto"
+        onTimeUpdate={() => {
+          if (audioRef.current && audioRef.current.currentTime > 0) {
+            currentAudioTimeRef.current = audioRef.current.currentTime;
+          }
+        }}
+        onLoadedMetadata={() => {
+          if (wasPlayingBeforeVNRef.current && currentAudioTimeRef.current > 0 && audioRef.current) {
+            try {
+              audioRef.current.currentTime = currentAudioTimeRef.current;
+            } catch {}
+          }
+        }}
         onPlay={() => {
           if (activeSource !== 'youtube') setIsPlaying(true);
         }}
@@ -456,6 +523,7 @@ export default function MusicPlayer({ autoPlayTrigger }) {
           if (activeSource !== 'youtube') setIsPlaying(false);
         }}
         onEnded={() => {
+          currentAudioTimeRef.current = 0;
           if (activeSource !== 'youtube') setIsPlaying(false);
         }}
       />
