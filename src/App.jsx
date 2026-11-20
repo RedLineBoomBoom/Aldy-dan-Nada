@@ -8,11 +8,16 @@ import HeroSection from './components/HeroSection';
 import FourYearTimeline from './components/FourYearTimeline';
 import InteractivePolaroidWall from './components/InteractivePolaroidWall';
 import LoveLetterSection from './components/LoveLetterSection';
+import MidnightSecretLetterModal from './components/MidnightSecretLetterModal';
 import OpenWhenLetters from './components/OpenWhenLetters';
 import CouplesFunZone from './components/CouplesFunZone';
 import BucinStickersSection from './components/BucinStickersSection';
 import CoupleQuizGame from './components/CoupleQuizGame';
 import GombalanGenerator from './components/GombalanGenerator';
+import LoveStatsInfographic from './components/LoveStatsInfographic';
+import VoiceNotePlayer from './components/VoiceNotePlayer';
+import CoupleBucketList from './components/CoupleBucketList';
+import LoveCertificateCard from './components/LoveCertificateCard';
 import TimeCapsuleWishBox from './components/TimeCapsuleWishBox';
 import PhotoModal from './components/PhotoModal';
 import Footer from './components/Footer';
@@ -163,6 +168,9 @@ export default function App() {
         {/* Hero & Live 4-Year Countdown */}
         <HeroSection featuredPhotos={featuredPhotos} />
 
+        {/* Infografis Statistik Cinta 4 Tahun (Angka-angka bermakna) */}
+        <LoveStatsInfographic />
+
         {/* 4-Year Story Timeline (Chapters 1, 2, 3, 4) */}
         <FourYearTimeline
           photos={rawPhotos}
@@ -177,11 +185,18 @@ export default function App() {
           onSelectPhoto={(photo) => setSelectedPhoto(photo)}
         />
 
-        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) */}
+        {/* Pesan Suara Khusus Dari Aldy (Vintage Cassette Voice Note Player) */}
+        <VoiceNotePlayer />
+
+        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) & Surat Rahasia Hari H */}
         <LoveLetterSection />
+        <MidnightSecretLetterModal />
 
         {/* Kotak Surat "Open When..." (Buka saat kangen, capek, kesel, semangat) */}
         <OpenWhenLetters />
+
+        {/* Peta Impian Berdua (Bucket List Interaktif Masa Depan) */}
+        <CoupleBucketList />
 
         {/* Zona Manis & Gemas (Love meter, Kupon Cinta, 10 Alasan) */}
         <CouplesFunZone />
@@ -194,6 +209,9 @@ export default function App() {
           <CoupleQuizGame />
           <GombalanGenerator />
         </section>
+
+        {/* Sertifikat Resmi Cinta 4 Tahun (Bisa Diunduh sebagai Gambar PNG) */}
+        <LoveCertificateCard />
 
         {/* Kapsul Waktu Harapan Masa Depan */}
         <TimeCapsuleWishBox />
