@@ -60,9 +60,9 @@ export default function MusicPlayer({ autoPlayTrigger }) {
 
   const [currentTrackTitle, setCurrentTrackTitle] = useState(() => {
     try {
-      return sessionStorage.getItem('anniversary_track_title') || "I'd Risk It All For You ❤️";
+      return sessionStorage.getItem('anniversary_track_title') || "Perhaps Love (사랑인가요) ❤️";
     } catch {
-      return "I'd Risk It All For You ❤️";
+      return "Perhaps Love (사랑인가요) ❤️";
     }
   });
 
@@ -374,7 +374,7 @@ export default function MusicPlayer({ autoPlayTrigger }) {
 
     setActiveSource('local');
     setCustomAudioUrl('/music.mp3');
-    setCurrentTrackTitle("I'd Risk It All For You ❤️");
+    setCurrentTrackTitle("Perhaps Love (사랑인가요) ❤️");
     setYoutubeInput('');
     setYoutubeVideoId(null);
     setYoutubeError('');
