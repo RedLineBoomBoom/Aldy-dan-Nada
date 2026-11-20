@@ -68,6 +68,23 @@ export default function HeroSection({ featuredPhotos = [] }) {
       {/* Soft romantic backdrop blurs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-tr from-rose-200/40 via-pink-100/30 to-amber-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
+      {/* Decorative Background Couple Cutouts (50% Opacity) */}
+      <div className="hidden md:block absolute -left-8 lg:left-2 xl:left-8 2xl:left-14 bottom-4 lg:bottom-8 w-44 md:w-52 lg:w-64 xl:w-76 2xl:w-84 pointer-events-none select-none z-0 transition-opacity duration-700">
+        <img
+          src="/bg_couple_left.png"
+          alt="Aldy &amp; Nada"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-sm transform -rotate-2"
+        />
+      </div>
+
+      <div className="hidden md:block absolute -right-8 lg:right-2 xl:right-8 2xl:right-14 bottom-4 lg:bottom-8 w-44 md:w-52 lg:w-64 xl:w-76 2xl:w-84 pointer-events-none select-none z-0 transition-opacity duration-700">
+        <img
+          src="/bg_couple_right.png"
+          alt="Aldy &amp; Nada"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-sm transform rotate-2"
+        />
+      </div>
+
       {/* Top Cute Pill */}
       <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-rose-100/80 border border-rose-200/90 text-rose-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-sm animate-float-slow whitespace-nowrap">
         <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500 shrink-0" />
