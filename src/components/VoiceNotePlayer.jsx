@@ -4,7 +4,7 @@ import { Play, Pause, Mic, Upload, Volume2, RotateCcw, Heart, Sparkles, Check, D
 export default function VoiceNotePlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(42); // default 42s
+  const [duration, setDuration] = useState(163); // default 163s (~2m 43s)
   const [audioUrl, setAudioUrl] = useState(() => {
     try {
       return localStorage.getItem('anniversary_custom_voicenote') || '/voicenote.mp3';
@@ -176,7 +176,7 @@ export default function VoiceNotePlayer() {
   };
 
   const handleSeek = (newTime) => {
-    const target = Math.max(0, Math.min(newTime, duration || 42));
+    const target = Math.max(0, Math.min(newTime, duration || 163));
     setCurrentTime(target);
     if (audioRef.current) {
       audioRef.current.currentTime = target;
@@ -271,9 +271,9 @@ export default function VoiceNotePlayer() {
               <input
                 type="range"
                 min="0"
-                max={duration || 42}
+                max={duration || 163}
                 step="0.1"
-                value={Math.min(currentTime, duration || 42)}
+                value={Math.min(currentTime, duration || 163)}
                 onChange={(e) => handleSeek(parseFloat(e.target.value))}
                 className="absolute inset-0 w-full h-full opacity-0 z-30 cursor-pointer"
                 title="Geser atau klik untuk memajukan / mengulang audio"
@@ -283,14 +283,14 @@ export default function VoiceNotePlayer() {
               <div className="w-full h-2.5 bg-black/60 rounded-full overflow-hidden border border-rose-900/50 relative">
                 <div
                   className="h-full bg-gradient-to-r from-rose-500 via-pink-400 to-amber-300 rounded-full transition-all"
-                  style={{ width: `${Math.min(100, (currentTime / (duration || 42)) * 100)}%` }}
+                  style={{ width: `${Math.min(100, (currentTime / (duration || 163)) * 100)}%` }}
                 />
               </div>
 
               {/* Custom Thumb handle */}
               <div
                 className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full shadow-lg shadow-rose-500/60 border-2 border-rose-500 pointer-events-none group-hover:scale-125 transition-transform z-20"
-                style={{ left: `${Math.min(100, Math.max(0, (currentTime / (duration || 42)) * 100))}%` }}
+                style={{ left: `${Math.min(100, Math.max(0, (currentTime / (duration || 163)) * 100))}%` }}
               />
             </div>
 
