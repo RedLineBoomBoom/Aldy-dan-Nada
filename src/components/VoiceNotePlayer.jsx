@@ -30,7 +30,7 @@ export default function VoiceNotePlayer() {
   const audioChunksRef = useRef([]);
   const recordingTimerRef = useRef(null);
 
-  // Sync time
+  // Sync time & events with audio element
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -45,21 +45,59 @@ export default function VoiceNotePlayer() {
       }
     };
 
+    const handlePlay = () => {
+      setIsPlaying(true);
+      window.dispatchEvent(
+        new CustomEvent('anniversary_voicenote_state', { detail: { isPlaying: true } })
+      );
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+      window.dispatchEvent(
+        new CustomEvent('anniversary_voicenote_state', { detail: { isPlaying: false } })
+      );
+    };
+
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      window.dispatchEvent(
+        new CustomEvent('anniversary_voicenote_state', { detail: { isPlaying: false } })
+      );
     };
 
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('ended', handleEnded);
 
     return () => {
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnded);
     };
   }, [audioUrl]);
+
+  // Pause voice note if background music is manually resumed/played
+  useEffect(() => {
+    const handleMusicPlay = () => {
+      if (audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+    window.addEventListener('anniversary_music_play', handleMusicPlay);
+    return () => {
+      window.removeEventListener('anniversary_music_play', handleMusicPlay);
+      window.dispatchEvent(
+        new CustomEvent('anniversary_voicenote_state', { detail: { isPlaying: false } })
+      );
+    };
+  }, []);
 
   const togglePlay = () => {
     const audio = audioRef.current;

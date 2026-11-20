@@ -79,6 +79,16 @@ export default function MusicPlayer({ autoPlayTrigger }) {
   const ytPlayerRef = useRef(null);
   const isYtApiReadyRef = useRef(false);
 
+  // Auto-pause when Aldy's Voice Note plays, auto-resume when it ends/pauses
+  const wasPlayingBeforeVNRef = useRef(false);
+  const isPlayingRef = useRef(isPlaying);
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  const startPlayRef = useRef(null);
+  const pausePlayRef = useRef(null);
+
   // Load YouTube IFrame API script once & bersihkan legacy localStorage music
   useEffect(() => {
     try {
@@ -235,6 +245,8 @@ export default function MusicPlayer({ autoPlayTrigger }) {
 
   const startPlay = () => {
     setIsPlaying(true);
+    // Notify any other audio players (like voice notes) that background music has started
+    window.dispatchEvent(new CustomEvent('anniversary_music_play'));
     if (activeSource === 'youtube' && ytPlayerRef.current && typeof ytPlayerRef.current.playVideo === 'function') {
       if (audioRef.current) audioRef.current.pause();
       ytPlayerRef.current.playVideo();
@@ -258,9 +270,36 @@ export default function MusicPlayer({ autoPlayTrigger }) {
     romanticMusicBox.pause();
   };
 
+  startPlayRef.current = startPlay;
+  pausePlayRef.current = pausePlay;
+
+  // Auto-pause background music when Aldy's Voice Note plays, auto-resume when it ends/pauses
+  useEffect(() => {
+    const handleVoiceNoteState = (e) => {
+      const isVNPlaying = !!e.detail?.isPlaying;
+      if (isVNPlaying) {
+        if (isPlayingRef.current) {
+          wasPlayingBeforeVNRef.current = true;
+          pausePlayRef.current?.();
+        }
+      } else {
+        if (wasPlayingBeforeVNRef.current) {
+          wasPlayingBeforeVNRef.current = false;
+          startPlayRef.current?.();
+        }
+      }
+    };
+
+    window.addEventListener('anniversary_voicenote_state', handleVoiceNoteState);
+    return () => {
+      window.removeEventListener('anniversary_voicenote_state', handleVoiceNoteState);
+    };
+  }, []);
+
   const togglePlay = () => {
     resetHideTimer();
     if (isPlaying) {
+      wasPlayingBeforeVNRef.current = false;
       pausePlay();
     } else {
       startPlay();
