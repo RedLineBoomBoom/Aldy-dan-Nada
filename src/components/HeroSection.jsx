@@ -73,7 +73,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
         <img
           src="/bg_couple_left.png"
           alt="Aldy &amp; Nada - Kenangan Manis"
-          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform -rotate-4 lg:-rotate-6 origin-bottom-left"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform -rotate-4 lg:-rotate-6 origin-bottom-left [mask-image:linear-gradient(to_top,transparent_0%,black_15%,black_100%)]"
         />
       </div>
 
@@ -81,7 +81,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
         <img
           src="/bg_couple_right.png"
           alt="Aldy &amp; Nada - Momen Berdua"
-          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform rotate-4 lg:rotate-6 origin-bottom-right"
+          className="w-full h-auto object-contain opacity-50 drop-shadow-md transform rotate-4 lg:rotate-6 origin-bottom-right [mask-image:linear-gradient(to_top,transparent_0%,black_15%,black_100%)]"
         />
       </div>
 
