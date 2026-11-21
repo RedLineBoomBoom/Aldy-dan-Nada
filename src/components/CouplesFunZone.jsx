@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
-import { Heart, Sparkles, Gift, CheckCircle, Flame, Laugh, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Heart, Sparkles, Gift, CheckCircle, Flame, Laugh, ArrowRight, RotateCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import {
+  subscribeCoupons,
+  claimCouponCloud,
+  resetCoupons,
+  isFirebaseConfigured,
+} from '../services/cloudSync';
 
 export default function CouplesFunZone() {
   // Love meter state
   const [lovePercent, setLovePercent] = useState(100);
   const [isOverload, setIsOverload] = useState(false);
 
-  // Coupons claimed state
-  const [claimedCoupons, setClaimedCoupons] = useState({});
+  // Coupons claimed state with instant localStorage + real-time cloud sync
+  const [claimedCoupons, setClaimedCoupons] = useState(() => {
+    try {
+      const saved = localStorage.getItem('anniversary_claimed_coupons');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    const unsubscribe = subscribeCoupons((data) => {
+      if (data && typeof data === 'object') {
+        setClaimedCoupons(data);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   // 10 Reasons why Aldy loves Nada
   const [revealedReasons, setRevealedReasons] = useState({});
@@ -58,13 +80,42 @@ export default function CouplesFunZone() {
   ];
 
   const handleClaim = (couponId) => {
-    setClaimedCoupons((prev) => ({ ...prev, [couponId]: true }));
+    claimCouponCloud(couponId, claimedCoupons);
+    setClaimedCoupons((prev) => {
+      const next = {
+        ...prev,
+        [couponId]: {
+          claimed: true,
+          claimedAt: Date.now(),
+          dateStr: new Date().toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+          }),
+        },
+      };
+      try {
+        localStorage.setItem('anniversary_claimed_coupons', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+
     confetti({
       particleCount: 50,
       spread: 70,
       origin: { y: 0.7 },
       colors: ['#f43f5e', '#fb7185', '#fbbf24', '#34d399'],
     });
+  };
+
+  const handleResetCoupons = () => {
+    if (window.confirm('Reset semua status kupon agar bisa diklaim kembali?')) {
+      resetCoupons();
+      setClaimedCoupons({});
+      try {
+        localStorage.removeItem('anniversary_claimed_coupons');
+      } catch {}
+    }
   };
 
   const handleSliderChange = (e) => {
@@ -165,20 +216,31 @@ export default function CouplesFunZone() {
         </div>
       </div>
 
-      {/* Part 2: Kupon Cinta 4 Tahun (Interactive Vouchers) */}
+      {/* Part 2: Kupon Cinta 4 Tahun (Interactive Vouchers with Realtime Cloud Sync) */}
       <div className="mb-10 sm:mb-16">
         <div className="text-center mb-6 sm:mb-8">
-          <h3 className="text-lg sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
-            🎟️ Kupon Cinta <span className="inline-block whitespace-nowrap">Spesial 4 Tahun</span>
-          </h3>
-          <p className="text-xs sm:text-sm text-gray-600 px-2">
-            Kupon ini resmi dan bisa Nada gunakan kapan aja ke Aldy. Klik "Klaim Kupon" untuk mengaktifkannya!
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5 mb-1.5 sm:mb-2">
+            <h3 className="text-lg sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 leading-tight">
+              🎟️ Kupon Cinta <span className="inline-block whitespace-nowrap">Spesial 4 Tahun</span>
+            </h3>
+            {isFirebaseConfigured && (
+              <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                <span>Tersinkron di HP Nada &amp; Aldy ✨</span>
+              </span>
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-gray-600 px-2 max-w-xl mx-auto">
+            Kupon ini resmi dan bisa Nada gunakan kapan aja ke Aldy. Status klaim tersimpan permanen dan tersinkronisasi otomatis!
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {coupons.map((coupon) => {
-            const isClaimed = claimedCoupons[coupon.id];
+            const claimData = claimedCoupons[coupon.id];
+            const isClaimed = typeof claimData === 'object' ? !!claimData.claimed : !!claimData;
+            const claimDate = typeof claimData === 'object' && claimData.dateStr ? claimData.dateStr : null;
+
             return (
               <div
                 key={coupon.id}
@@ -192,7 +254,7 @@ export default function CouplesFunZone() {
                     </span>
                     {isClaimed && (
                       <span className="bg-rose-500/10 border border-rose-500 text-rose-600 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wider uppercase shrink-0 animate-in fade-in whitespace-nowrap">
-                        ✓ TERKLAIM
+                        ✓ TERKLAIM {claimDate ? `(${claimDate})` : ''}
                       </span>
                     )}
                   </div>
@@ -233,6 +295,19 @@ export default function CouplesFunZone() {
             );
           })}
         </div>
+
+        {/* Reset Option if any coupon is claimed */}
+        {Object.keys(claimedCoupons).some((k) => !!claimedCoupons[k]) && (
+          <div className="text-center mt-4 sm:mt-5">
+            <button
+              onClick={handleResetCoupons}
+              className="inline-flex items-center gap-1 text-[11px] text-gray-400 hover:text-rose-600 transition cursor-pointer underline underline-offset-2"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset status kupon</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Part 3: 10 Alasan Kenapa Aldy Selalu Sayang Nada */}

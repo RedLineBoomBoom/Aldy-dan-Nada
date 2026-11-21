@@ -205,3 +205,104 @@ export async function resetStickers() {
   }
   return DEFAULT_STICKERS;
 }
+
+/* ==========================================================================
+   3. KUPON CINTA (CLAIMED COUPONS REAL-TIME & LOCAL PERSISTENCE)
+   ========================================================================== */
+export const COUPONS_STORAGE_KEY = 'anniversary_claimed_coupons';
+
+/**
+ * Subscribe to real-time claimed coupons from Firebase and cache to localStorage.
+ */
+export function subscribeCoupons(callback) {
+  try {
+    const local = localStorage.getItem(COUPONS_STORAGE_KEY);
+    if (local) {
+      callback(JSON.parse(local));
+    } else {
+      callback({});
+    }
+  } catch {
+    callback({});
+  }
+
+  if (!db) return () => {};
+
+  const couponsRef = ref(db, 'anniversary/coupons');
+  const unsubscribe = onValue(
+    couponsRef,
+    (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const couponsData = data?.items || data || {};
+        callback(couponsData);
+        try {
+          localStorage.setItem(COUPONS_STORAGE_KEY, JSON.stringify(couponsData));
+        } catch {}
+      }
+    },
+    (err) => {
+      console.warn('Cloud sync error (coupons):', err);
+    }
+  );
+
+  return unsubscribe;
+}
+
+/**
+ * Save claimed coupon to cloud and localStorage.
+ */
+export async function claimCouponCloud(couponId, currentClaimed = {}) {
+  const updated = {
+    ...currentClaimed,
+    [couponId]: {
+      claimed: true,
+      claimedAt: Date.now(),
+      dateStr: new Date().toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }),
+    }
+  };
+
+  try {
+    localStorage.setItem(COUPONS_STORAGE_KEY, JSON.stringify(updated));
+  } catch {}
+
+  if (db) {
+    try {
+      const couponsRef = ref(db, 'anniversary/coupons');
+      await set(couponsRef, {
+        items: updated,
+        updatedAt: Date.now(),
+      });
+    } catch (err) {
+      console.warn('Error saving coupon to cloud:', err);
+    }
+  }
+
+  return updated;
+}
+
+/**
+ * Reset all coupons to unclaimed state.
+ */
+export async function resetCoupons() {
+  try {
+    localStorage.removeItem(COUPONS_STORAGE_KEY);
+  } catch {}
+
+  if (db) {
+    try {
+      const couponsRef = ref(db, 'anniversary/coupons');
+      await set(couponsRef, {
+        items: false,
+        updatedAt: Date.now(),
+      });
+    } catch (err) {
+      console.warn('Error resetting coupons on cloud:', err);
+    }
+  }
+  return {};
+}
