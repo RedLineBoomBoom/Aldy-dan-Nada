@@ -93,7 +93,8 @@ export default function CoupleBucketList() {
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
-          <Sparkles className="w-3.5 h-3.5 shrink-0" /> Peta Impian • Our Future Bucket List
+          <Sparkles className="w-3.5 h-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Peta Impian Masa Depan</span>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
           Impian yang Ingin Kita <span className="inline-block whitespace-nowrap text-rose-600">Wujudkan Bersama</span>

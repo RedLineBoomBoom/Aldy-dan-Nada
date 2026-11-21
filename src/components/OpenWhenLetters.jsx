@@ -212,7 +212,7 @@ export default function OpenWhenLetters() {
                   <img
                     src={activeLetter.cutout || '/bg_couple_right.png'}
                     alt={activeLetter.title}
-                    className="relative max-h-[250px] sm:max-h-[300px] w-auto max-w-[95%] sm:max-w-[85%] object-contain drop-shadow-md opacity-95 [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] animate-float-slow"
+                    className="relative max-h-[220px] sm:max-h-[280px] w-auto max-w-[95%] sm:max-w-[85%] object-contain drop-shadow-md opacity-95 [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] animate-float-slow"
                   />
                   {activeLetter.caption && (
                     <span className="text-[11px] sm:text-xs font-romantic italic text-rose-600 mt-2 text-center px-4 max-w-sm tracking-wide leading-snug">

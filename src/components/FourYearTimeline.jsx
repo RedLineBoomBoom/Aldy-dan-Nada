@@ -15,7 +15,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       description:
         'Masih ingat canggungnya obrolan pertama kita? Dari saling curi pandang, senyum malu-malu di kencan pertama, sampai akhirnya Aldy berani menggenggam tangan Nada. Di tahun pertama ini, Aldy sadar bahwa kehadiran Nada membawa warna baru yang begitu hangat.',
       quote: '“Setiap senyum manis Nada di tahun ini selalu bikin hati Aldy luluh.”',
-      milestone: 'Kencan pertama & momen jadian yang tak terlupakan ❤️',
+      milestone: 'Kencan pertama & jadian manis ❤️',
     },
     {
       year: 2,
@@ -27,7 +27,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       description:
         'Masa di mana kita mulai hafal kebiasaan konyol masing-masing. Berburu kuliner enak, jalan-jalan sore tanpa tujuan jelas, foto candid lucu, sampai ketawa ngakak bareng. Hal-hal paling sederhana sekalipun jadi terasa magis kalau dilewatin bareng kamu.',
       quote: '“Bisa jadi diri sendiri seutuhnya saat berada di sampingmu.”',
-      milestone: 'Ratusan tempat kuliner & foto lucu tak terhitung 🍦',
+      milestone: 'Ratusan kuliner & foto lucu 🍦',
     },
     {
       year: 3,
@@ -39,7 +39,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       description:
         'Hubungan kita bukan hanya tentang hari-hari cerah, tapi juga tentang saling menopang di hari yang lelah. Menjadi pendengar setia saat ada keluh kesah, pelukan penenang saat sedang capek, dan alasan untuk selalu bangkit lagi. Makasih udah selalu jadi support system terbaik buat Aldy.',
       quote: '“Nada adalah rumah paling tenang di kala dunia sedang ramai.”',
-      milestone: 'Belajar saling mengerti, memaafkan, dan tumbuh dewasa bersama 🫂',
+      milestone: 'Saling menguatkan & bertumbuh 🫂',
     },
     {
       year: 4,
@@ -51,7 +51,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       description:
         'Genap 4 tahun kita bergandengan tangan. Waktu berlalu begitu cepat, tapi perasaan kagum dan sayang Aldy ke Nada nggak pernah berkurang sedikit pun. Malah makin dalam setiap harinya. Aldy bersyukur banget punya kamu, dan Aldy ingin terus sama kamu untuk tahun-tahun selanjutnya.',
       quote: '“4 tahun yang indah, dan Aldy siap untuk ribuan tahun bersamamu ke depan.”',
-      milestone: 'Empat tahun penuh cinta, komitmen, dan mimpi masa depan 💍',
+      milestone: 'Empat tahun penuh cinta & doa 💍',
     },
   ];
 
@@ -59,14 +59,14 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
   const yearPhotos = photos.filter((p) => p.year === activeYearTab);
 
   return (
-    <section id="timeline" className="relative py-12 sm:py-20 px-3.5 sm:px-6 max-w-6xl mx-auto section-opt">
+    <section id="timeline" className="relative py-8 sm:py-16 px-3.5 sm:px-6 max-w-6xl mx-auto section-opt scroll-mt-6 sm:scroll-mt-10">
       {/* Section Header */}
-      <div className="text-center mb-8 sm:mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
+      <div className="text-center mb-5 sm:mb-10">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-2.5 whitespace-nowrap">
           <Calendar className="w-3.5 h-3.5 shrink-0" />
           <span className="whitespace-nowrap">Kilas Balik 4 Tahun</span>
         </div>
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-1.5 sm:mb-3 leading-tight">
           Perjalanan Cinta <span className="inline-block">Aldy <span className="text-rose-500 italic">&amp;</span> Nada</span>
         </h2>
         <p className="text-gray-600 max-w-xl mx-auto text-xs sm:text-base px-2">
@@ -75,13 +75,13 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       </div>
 
       {/* Interactive Tabs for Years (Grid on mobile to fit all 4 years without clipping) */}
-      <div className="flex justify-center mb-6 sm:mb-10">
+      <div className="flex justify-center mb-4 sm:mb-8">
         <div className="grid grid-cols-4 w-full max-w-md p-1 sm:p-1.5 bg-rose-100/70 border border-rose-200/80 rounded-2xl shadow-inner gap-1 sm:gap-2">
           {chapters.map((ch) => (
             <button
               key={ch.year}
               onClick={() => setActiveYearTab(ch.year)}
-              className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-1 sm:px-4 py-1.5 sm:py-2.5 rounded-xl text-center transition-all duration-300 cursor-pointer ${
+              className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-1 sm:px-4 py-1.5 sm:py-2 rounded-xl text-center transition-all duration-300 cursor-pointer ${
                 activeYearTab === ch.year
                   ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30 font-bold scale-[1.02]'
                   : 'text-gray-700 hover:text-rose-700 hover:bg-white/60 font-medium'
@@ -95,47 +95,48 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       </div>
 
       {/* Chapter Details Card */}
-      <div className="bg-white/95 border border-rose-100 rounded-3xl p-4 sm:p-8 md:p-10 shadow-xl shadow-rose-950/5 mb-10 sm:mb-12 relative overflow-hidden transition-all duration-500">
+      <div className="bg-white/95 border border-rose-100 rounded-3xl p-3.5 sm:p-7 md:p-9 shadow-xl shadow-rose-950/5 mb-8 sm:mb-12 relative overflow-hidden transition-all duration-500">
         {/* Glow accent */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-rose-100/50 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-6 mb-5 sm:mb-8 border-b border-rose-100/80 pb-4 sm:pb-6">
-          <div>
-            <span className="inline-block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-rose-500 mb-1">
+        {/* Compact Chapter Header: Badges side-by-side, never wraps awkwardly */}
+        <div className="relative z-10 mb-3.5 sm:mb-6 border-b border-rose-100/80 pb-3 sm:pb-5">
+          <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-3 mb-2">
+            <span className="inline-block text-[10px] sm:text-xs uppercase tracking-wider font-bold text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200/50">
               {currentChapter.period}
             </span>
-            <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-1 leading-snug">
-              {currentChapter.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-500 italic">
-              {currentChapter.subtitle}
-            </p>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-200/70 rounded-full text-rose-700 font-semibold text-[10px] sm:text-xs shadow-2xs">
+              <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />
+              <span className="whitespace-nowrap">{currentChapter.milestone}</span>
+            </div>
           </div>
 
-          <div className="w-full md:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-start sm:items-center gap-1.5 text-rose-700 font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5 sm:mt-0" />
-            <span className="leading-snug text-[11px] sm:text-xs">{currentChapter.milestone}</span>
-          </div>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-romantic font-bold text-gray-900 mb-1 leading-snug">
+            {currentChapter.title}
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-500 italic">
+            {currentChapter.subtitle}
+          </p>
         </div>
 
-        <p className="text-gray-700 leading-relaxed text-xs sm:text-base mb-5 sm:mb-6">
+        <p className="text-gray-700 leading-relaxed text-xs sm:text-base mb-3.5 sm:mb-5">
           {currentChapter.description}
         </p>
 
-        <div className="bg-rose-50/70 border-l-4 border-rose-400 p-3.5 sm:p-4 rounded-r-2xl mb-6 sm:mb-8">
-          <p className="font-romantic italic text-sm sm:text-lg text-rose-900">
+        <div className="bg-rose-50/70 border-l-3 sm:border-l-4 border-rose-400 px-3 py-2 sm:px-4 sm:py-3 rounded-r-xl sm:rounded-r-2xl mb-4 sm:mb-6">
+          <p className="font-romantic italic text-xs sm:text-base text-rose-900 leading-snug">
             {currentChapter.quote}
           </p>
         </div>
 
         {/* Year Photo Grid Gallery */}
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-4">
-            <h4 className="text-xs sm:text-sm font-bold text-gray-800 flex items-center gap-1.5">
+          <div className="flex flex-row items-center justify-between gap-1 mb-3 sm:mb-4">
+            <h4 className="text-xs sm:text-sm font-bold text-gray-800 flex items-center gap-1.5 whitespace-nowrap">
               <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-rose-500 text-rose-500 shrink-0" />
-              <span>Foto Kenangan Tahun ke-{activeYearTab} ({yearPhotos.length} Foto)</span>
+              <span>Foto Kenangan ({yearPhotos.length} Foto)</span>
             </h4>
-            <span className="text-[10px] sm:text-xs text-gray-400">Klik foto untuk memperbesar ✨</span>
+            <span className="text-[10px] sm:text-xs text-rose-400 font-medium">Klik untuk perbesar ✨</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">

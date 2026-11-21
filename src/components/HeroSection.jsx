@@ -101,7 +101,7 @@ export default function HeroSection({ featuredPhotos = [] }) {
       {/* Top Cute Pill */}
       <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-rose-100/80 border border-rose-200/90 text-rose-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6 shadow-sm animate-float-slow whitespace-nowrap">
         <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rose-500 shrink-0" />
-        <span className="whitespace-nowrap">Spesial 4 Tahun Perjalanan Cinta</span>
+        <span className="whitespace-nowrap">Spesial 4 Tahun Cinta</span>
         <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
       </div>
 
