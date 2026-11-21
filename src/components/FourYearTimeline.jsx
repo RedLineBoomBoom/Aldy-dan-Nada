@@ -59,71 +59,71 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
   const yearPhotos = photos.filter((p) => p.year === activeYearTab);
 
   return (
-    <section id="timeline" className="relative py-20 px-4 max-w-6xl mx-auto section-opt">
+    <section id="timeline" className="relative py-12 sm:py-20 px-3.5 sm:px-6 max-w-6xl mx-auto section-opt">
       {/* Section Header */}
-      <div className="text-center mb-14">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-3 whitespace-nowrap">
+      <div className="text-center mb-8 sm:mb-14">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
           <Calendar className="w-3.5 h-3.5 shrink-0" />
           <span className="whitespace-nowrap">Kilas Balik 4 Tahun</span>
         </div>
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
-          Perjalanan Cinta <span className="inline-block whitespace-nowrap">Aldy <span className="text-rose-500 italic">&amp;</span> Nada</span>
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-romantic font-bold text-gray-900 mb-2 sm:mb-4 leading-tight">
+          Perjalanan Cinta <span className="inline-block">Aldy <span className="text-rose-500 italic">&amp;</span> Nada</span>
         </h2>
-        <p className="text-gray-600 max-w-xl mx-auto text-sm sm:text-base">
+        <p className="text-gray-600 max-w-xl mx-auto text-xs sm:text-base px-2">
           Setiap babak punya keindahannya sendiri. Klik setiap tahun di bawah untuk membuka kenangan-kenangan manis kita:
         </p>
       </div>
 
-      {/* Interactive Tabs for Years */}
-      <div className="flex justify-center mb-12">
-        <div className="inline-flex p-1.5 bg-rose-100/70 border border-rose-200/80 rounded-2xl shadow-inner gap-1 sm:gap-2 max-w-full overflow-x-auto no-scrollbar">
+      {/* Interactive Tabs for Years (Grid on mobile to fit all 4 years without clipping) */}
+      <div className="flex justify-center mb-8 sm:mb-12">
+        <div className="grid grid-cols-4 w-full max-w-lg p-1 sm:p-1.5 bg-rose-100/70 border border-rose-200/80 rounded-2xl shadow-inner gap-1 sm:gap-2">
           {chapters.map((ch) => (
             <button
               key={ch.year}
               onClick={() => setActiveYearTab(ch.year)}
-              className={`flex items-center gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 cursor-pointer whitespace-nowrap ${
+              className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-1 sm:px-4 py-2 sm:py-2.5 rounded-xl text-center transition-all duration-300 cursor-pointer ${
                 activeYearTab === ch.year
-                  ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30 scale-100'
-                  : 'text-gray-700 hover:text-rose-700 hover:bg-white/60'
+                  ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30 font-bold scale-[1.02]'
+                  : 'text-gray-700 hover:text-rose-700 hover:bg-white/60 font-medium'
               }`}
             >
-              <span className="text-base sm:text-lg">{ch.icon}</span>
-              <span className="font-semibold">Tahun {ch.year}</span>
+              <span className="text-sm sm:text-lg">{ch.icon}</span>
+              <span className="text-[11px] sm:text-sm font-semibold tracking-tight whitespace-nowrap">Tahun {ch.year}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Chapter Details Card */}
-      <div className="bg-white/90 border border-rose-100 rounded-3xl p-6 sm:p-10 shadow-xl shadow-rose-950/5 mb-12 relative overflow-hidden transition-all duration-500">
+      <div className="bg-white/95 border border-rose-100 rounded-3xl p-4 sm:p-8 md:p-10 shadow-xl shadow-rose-950/5 mb-10 sm:mb-12 relative overflow-hidden transition-all duration-500">
         {/* Glow accent */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-rose-100/50 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-rose-100/80 pb-6">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 border-b border-rose-100/80 pb-5 sm:pb-6">
           <div>
-            <span className="inline-block text-xs uppercase tracking-wider font-bold text-rose-500 mb-1.5">
+            <span className="inline-block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-rose-500 mb-1">
               {currentChapter.period}
             </span>
-            <h3 className="text-2xl sm:text-3xl font-romantic font-bold text-gray-900 mb-1">
+            <h3 className="text-xl sm:text-3xl font-romantic font-bold text-gray-900 mb-1 leading-snug">
               {currentChapter.title}
             </h3>
-            <p className="text-sm text-gray-500 italic">
+            <p className="text-xs sm:text-sm text-gray-500 italic">
               {currentChapter.subtitle}
             </p>
           </div>
 
-          <div className="self-start md:self-center px-4 py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-center gap-2 text-rose-700 text-xs font-semibold whitespace-nowrap">
-            <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-            <span className="whitespace-nowrap">{currentChapter.milestone}</span>
+          <div className="w-full md:w-auto px-3.5 sm:px-4 py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-start sm:items-center gap-2 text-rose-700 text-xs font-semibold">
+            <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5 sm:mt-0" />
+            <span className="leading-snug">{currentChapter.milestone}</span>
           </div>
         </div>
 
-        <p className="text-gray-700 leading-relaxed text-sm sm:text-base mb-6">
+        <p className="text-gray-700 leading-relaxed text-xs sm:text-base mb-5 sm:mb-6">
           {currentChapter.description}
         </p>
 
-        <div className="bg-rose-50/70 border-l-4 border-rose-400 p-4 rounded-r-2xl mb-8">
-          <p className="font-romantic italic text-base sm:text-lg text-rose-900">
+        <div className="bg-rose-50/70 border-l-4 border-rose-400 p-3.5 sm:p-4 rounded-r-2xl mb-6 sm:mb-8">
+          <p className="font-romantic italic text-sm sm:text-lg text-rose-900">
             {currentChapter.quote}
           </p>
         </div>
