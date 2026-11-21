@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Heart, Sparkles, X, Moon, Smile, Frown, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function OpenWhenLetters() {
   const [activeLetter, setActiveLetter] = useState(null);
+
+  // Lock background scroll on mobile and desktop when a letter modal is open
+  useEffect(() => {
+    if (activeLetter) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+      };
+    }
+  }, [activeLetter]);
 
   const letters = [
     {
@@ -133,11 +149,18 @@ export default function OpenWhenLetters() {
       {activeLetter && (
         <div
           onClick={() => setActiveLetter(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
+          onTouchMove={(e) => {
+            // Prevent background touch scrolling when dragging outside on backdrop
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+            }
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-300 overscroll-none touch-none"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg bg-[#fffdfa] border border-rose-200 rounded-3xl p-6 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 max-h-[90vh] overflow-y-auto no-scrollbar"
+            onTouchMove={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg bg-[#fffdfa] border border-rose-200 rounded-3xl p-6 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain touch-pan-y no-scrollbar"
           >
             {/* Top Tape decoration */}
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs" />
