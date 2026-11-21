@@ -31,6 +31,8 @@ export default function OpenWhenLetters() {
       color: 'from-rose-500 to-pink-500',
       bgLight: 'bg-rose-50',
       badge: 'Buka Saat Rindu',
+      cutout: '/mood_kangen.png',
+      caption: 'Pelukan hangat Aldy selalu ada buat Nada tercinta ❤️',
       content: [
         'Hai sayangku...',
         'Kalau kamu lagi buka surat ini, pasti kamu lagi kangen banget ya sama Aldy? Percaya deh, detik ini juga Aldy pasti lagi mikirin kamu atau kangen senyum kamu.',
@@ -46,6 +48,8 @@ export default function OpenWhenLetters() {
       color: 'from-indigo-500 to-purple-500',
       bgLight: 'bg-indigo-50',
       badge: 'Buka Saat Lelah',
+      cutout: '/mood_lelah.png',
+      caption: 'Pundak Aldy selalu siap jadi tempat ternyamanmu bersandar 🫂✨',
       content: [
         'Sayangku, tarik napas pelan-pelan ya...',
         'Dunia di luar sana mungkin hari ini lagi berat, tugas atau pekerjaan mungkin bikin lelah, tapi Aldy mau ngingetin: kamu udah berjuang hebat banget hari ini. Aldy bener-bener bangga sama kamu.',
@@ -61,6 +65,8 @@ export default function OpenWhenLetters() {
       color: 'from-amber-500 to-rose-500',
       bgLight: 'bg-amber-50',
       badge: 'Buka Saat Ngambek',
+      cutout: '/mood_kesel.png',
+      caption: 'Senyum lagi dong bidadariku, jangan ngambek lama-lama ya 🍦🥰',
       content: [
         'Duh... Aldy bikin salah apa ya sampai bidadari Aldy cemberut begini? 🥺',
         'Pertama-tama, Aldy minta maaf yang sebesar-besarnya ya sayang kalau ucapan, sikap, atau ketidaktahuan Aldy bikin hati Nada terluka atau jengkel. Aldy nggak pernah ada niat sedikit pun buat bikin kamu sedih.',
@@ -76,6 +82,8 @@ export default function OpenWhenLetters() {
       color: 'from-emerald-500 to-teal-500',
       bgLight: 'bg-emerald-50',
       badge: 'Buka Saat Butuh Energi',
+      cutout: '/mood_semangat.png',
+      caption: 'Aldy selalu bangga dan jadi suporter nomor 1 buat Nada! 🎓🚀💖',
       content: [
         'Halo orang hebat kesayangan Aldy!',
         'Kalau kamu lagi merasa ragu sama kemampuanmu, ingat ini: Nada adalah wanita yang cerdas, tangguh, dan punya hati yang luar biasa. Aldy saksi hidup seberapa gigihnya kamu selama 4 tahun kita bareng.',
@@ -197,16 +205,21 @@ export default function OpenWhenLetters() {
               </div>
             </div>
 
-            {/* Transparent Couple Cutout filling the empty space on Mobile & Desktop */}
-            <div className="flex-1 my-3 sm:my-4 flex flex-col items-center justify-center pointer-events-none select-none relative min-h-[140px] sm:min-h-[160px]">
-              <div className="relative flex items-center justify-center">
+            {/* Transparent Couple Cutout filling the empty space on Mobile & Desktop (Enlarged & Unique per mood) */}
+            <div className="flex-1 my-2 sm:my-4 flex flex-col items-center justify-center pointer-events-none select-none relative min-h-[210px] sm:min-h-[260px]">
+              <div className="relative w-full flex flex-col items-center justify-center">
                 {/* Soft warm romantic glow behind cutout */}
-                <div className="absolute inset-0 bg-gradient-to-t from-rose-200/40 via-pink-100/25 to-transparent rounded-full blur-xl scale-110 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-rose-200/50 via-pink-100/30 to-transparent rounded-full blur-2xl scale-125 pointer-events-none" />
                 <img
-                  src="/bg_couple_right.png"
-                  alt="Aldy & Nada"
-                  className="relative max-h-48 sm:max-h-56 w-auto object-contain drop-shadow-md opacity-85 [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] animate-float-slow"
+                  src={activeLetter.cutout || '/bg_couple_right.png'}
+                  alt={activeLetter.title}
+                  className="relative max-h-[280px] sm:max-h-[340px] w-auto max-w-[92%] sm:max-w-[85%] object-contain drop-shadow-md opacity-90 [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] animate-float-slow"
                 />
+                {activeLetter.caption && (
+                  <span className="text-[11px] sm:text-xs font-romantic italic text-rose-500/90 mt-1.5 text-center px-4 tracking-wide drop-shadow-xs">
+                    {activeLetter.caption}
+                  </span>
+                )}
               </div>
             </div>
 
