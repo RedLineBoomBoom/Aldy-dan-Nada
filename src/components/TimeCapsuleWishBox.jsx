@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Hourglass, Sparkles, Send, Heart, Lock, Calendar } from 'lucide-react';
+import { Hourglass, Sparkles, Send, Heart, Lock, Calendar, Cloud } from 'lucide-react';
 import confetti from 'canvas-confetti';
-
-const STORAGE_KEY = 'anniversary_time_capsule_wishes';
-
-const DEFAULT_WISHES = [
-  {
-    id: 'default_1',
-    author: 'Aldy',
-    text: 'Semoga di tahun ke-5 dan seterusnya, kita bisa traveling ke tempat impian kita bareng, makin saling ngerti, dan selalu jadi tempat pulang paling nyaman untuk satu sama lain. I love you, Nada ❤️',
-    date: '22 November 2026',
-  },
-];
+import { subscribeWishes, saveNewWish, isFirebaseConfigured, DEFAULT_WISHES } from '../services/cloudSync';
 
 export default function TimeCapsuleWishBox() {
-  const [wishes, setWishes] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : DEFAULT_WISHES;
-    } catch {
-      return DEFAULT_WISHES;
-    }
-  });
-
+  const [wishes, setWishes] = useState(DEFAULT_WISHES);
   const [author, setAuthor] = useState('Nada');
   const [wishText, setWishText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  // Subscribe to real-time cloud data (or localStorage fallback)
+  useEffect(() => {
+    const unsubscribe = subscribeWishes((cloudWishes) => {
+      setWishes(cloudWishes);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!wishText.trim()) return;
 
@@ -43,13 +33,8 @@ export default function TimeCapsuleWishBox() {
       }),
     };
 
-    const updated = [newWish, ...wishes];
+    const updated = await saveNewWish(newWish, wishes);
     setWishes(updated);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    } catch (err) {
-      console.error(err);
-    }
 
     confetti({
       particleCount: 70,
@@ -86,7 +71,9 @@ export default function TimeCapsuleWishBox() {
             <span>Kirim Pesan ke Masa Depan</span>
           </h3>
           <p className="text-xs text-gray-500 mb-5">
-            Pesan ini tersimpan permanen dan tidak akan hilang saat di-refresh.
+            {isFirebaseConfigured
+              ? 'Pesan tersimpan di cloud & tersinkronisasi otomatis di HP Nada dan Aldy.'
+              : 'Pesan ini tersimpan permanen dan tidak akan hilang saat di-refresh.'}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -152,7 +139,14 @@ export default function TimeCapsuleWishBox() {
               <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
               <span>Harapan yang Sudah Terkunci ({wishes.length})</span>
             </h4>
-            <span className="text-[11px] text-gray-400">Tersimpan di Kapsul ✨</span>
+            {isFirebaseConfigured ? (
+              <span className="text-[11px] text-emerald-600 font-medium flex items-center gap-1.5 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Tersinkron di Semua HP ✨
+              </span>
+            ) : (
+              <span className="text-[11px] text-gray-400">Tersimpan di Kapsul ✨</span>
+            )}
           </div>
 
           <div className="space-y-3 max-h-[460px] overflow-y-auto no-scrollbar pr-1">

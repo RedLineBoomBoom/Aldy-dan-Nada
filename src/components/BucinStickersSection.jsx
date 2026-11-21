@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, Sparkles, Send, Smile, MessageCircleHeart, Plus, Trash2, Move, Hand } from 'lucide-react';
+import {
+  subscribeStickers,
+  saveStickers,
+  isFirebaseConfigured,
+  DEFAULT_STICKERS
+} from '../services/cloudSync';
 
 const STICKER_LIST = [
   {
@@ -91,21 +97,15 @@ export default function BucinStickersSection() {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [flyingStickers, setFlyingStickers] = useState([]);
   
-  // Sticker Board State
-  const [stickerBoard, setStickerBoard] = useState(() => {
-    try {
-      const saved = localStorage.getItem('anniversary_custom_stickers');
-      return saved ? JSON.parse(saved) : [
-        { id: 1, stickerId: 'bubu_hug', x: 15, y: 20, rotation: -4, note: 'Aldy ❤️ Nada' },
-        { id: 2, stickerId: 'bear_kiss', x: 55, y: 15, rotation: 6, note: '4 Tahun Selamanya!' }
-      ];
-    } catch {
-      return [
-        { id: 1, stickerId: 'bubu_hug', x: 15, y: 20, rotation: -4, note: 'Aldy ❤️ Nada' },
-        { id: 2, stickerId: 'bear_kiss', x: 55, y: 15, rotation: 6, note: '4 Tahun Selamanya!' }
-      ];
-    }
-  });
+  // Sticker Board State (Syncs real-time with Firebase / localStorage)
+  const [stickerBoard, setStickerBoard] = useState(DEFAULT_STICKERS);
+
+  useEffect(() => {
+    const unsubscribe = subscribeStickers((cloudStickers) => {
+      setStickerBoard(cloudStickers);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const [activeDraggingId, setActiveDraggingId] = useState(null);
   const [isDragOverBoard, setIsDragOverBoard] = useState(false);
@@ -192,9 +192,7 @@ export default function BucinStickersSection() {
 
     const updated = [...stickerBoard, newItem];
     setStickerBoard(updated);
-    try {
-      localStorage.setItem('anniversary_custom_stickers', JSON.stringify(updated));
-    } catch {}
+    saveStickers(updated);
 
     playPopSound(720);
     confetti({
@@ -256,9 +254,7 @@ export default function BucinStickersSection() {
 
     const updated = [...stickerBoard, newItem];
     setStickerBoard(updated);
-    try {
-      localStorage.setItem('anniversary_custom_stickers', JSON.stringify(updated));
-    } catch {}
+    saveStickers(updated);
 
     playPopSound(750);
     confetti({
@@ -331,13 +327,11 @@ export default function BucinStickersSection() {
     };
 
     const handlePointerUp = () => {
-      if (dragContextRef.current) {
-        try {
-          setStickerBoard(latest => {
-            localStorage.setItem('anniversary_custom_stickers', JSON.stringify(latest));
-            return latest;
-          });
-        } catch {}
+      if (dragContextRef.current && dragContextRef.current.hasMoved) {
+        setStickerBoard(latest => {
+          saveStickers(latest);
+          return latest;
+        });
       }
       dragContextRef.current = null;
       setActiveDraggingId(null);
@@ -358,9 +352,7 @@ export default function BucinStickersSection() {
     if (e) e.stopPropagation();
     const updated = stickerBoard.filter(item => item.id !== id);
     setStickerBoard(updated);
-    try {
-      localStorage.setItem('anniversary_custom_stickers', JSON.stringify(updated));
-    } catch {}
+    saveStickers(updated);
   };
 
   const handleSendToWhatsApp = (sticker) => {
@@ -530,15 +522,23 @@ export default function BucinStickersSection() {
             {/* Sticker Board Canvas (Tempel Stiker & Bebas Geser) */}
             <div className="bg-white/95 border border-rose-200/90 rounded-3xl p-4 sm:p-5 shadow-xl">
               <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-rose-50">
-                <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
-                  📌 Papan Stiker Kenangan Nada
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
+                    📌 Papan Stiker Kenangan Nada
+                  </span>
+                  {isFirebaseConfigured && (
+                    <span className="text-[9px] text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1 font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Sync Cloud
+                    </span>
+                  )}
+                </div>
                 {stickerBoard.length > 0 && (
                   <button
                     type="button"
                     onClick={() => {
                       setStickerBoard([]);
-                      try { localStorage.removeItem('anniversary_custom_stickers'); } catch {}
+                      saveStickers([]);
                     }}
                     className="text-[10px] text-gray-400 hover:text-rose-500 flex items-center gap-1 cursor-pointer transition"
                   >
@@ -632,7 +632,7 @@ export default function BucinStickersSection() {
                 <span className="flex items-center gap-1 text-rose-500 font-medium">
                   <Move className="w-3 h-3" /> Geser stiker bebas (terkunci di area papan)
                 </span>
-                <span>Tersimpan otomatis ✨</span>
+                <span>{isFirebaseConfigured ? 'Tersinkron di Semua HP ✨' : 'Tersimpan otomatis ✨'}</span>
               </div>
             </div>
           </div>
