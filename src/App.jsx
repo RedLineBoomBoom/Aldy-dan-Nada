@@ -203,7 +203,7 @@ export default function App() {
         <BucinStickersSection />
 
         {/* Mini Quiz Lucu & Generator Gombalan */}
-        <section className="px-3.5 sm:px-4 max-w-6xl mx-auto">
+        <section className="px-3.5 sm:px-4 max-w-6xl mx-auto section-opt">
           <CoupleQuizGame />
           <GombalanGenerator />
         </section>

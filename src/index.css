@@ -145,9 +145,11 @@
   scrollbar-width: none;
 }
 
-/* Performance Optimizations for Mobile & Desktop */
+/* Performance & Thermal Optimizations for Mobile & Desktop */
 .section-opt {
-  contain: style;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+  contain: style layout;
 }
 
 /* GPU Layer Promotion for silky smooth transitions */
@@ -156,9 +158,36 @@
   backface-visibility: hidden;
 }
 
-/* Optimize mobile rendering for backdrop blurs */
+/* Optimize mobile rendering, GPU shaders, and thermal management */
 @media (max-width: 640px) {
   .polaroid-card {
     will-change: auto;
+  }
+  /* Tone down heavy multi-pass Gaussian blur shaders that overheat mobile GPUs */
+  .blur-3xl {
+    filter: blur(24px) !important;
+  }
+  .blur-2xl {
+    filter: blur(16px) !important;
+  }
+  .blur-xl {
+    filter: blur(10px) !important;
+  }
+  .backdrop-blur-md {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  .backdrop-blur-lg {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
+
+/* Battery Saver / Low Power Mode respect */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

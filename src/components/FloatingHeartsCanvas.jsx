@@ -30,9 +30,46 @@ export default function FloatingHeartsCanvas() {
       'rgba(216, 180, 254, 0.48)', // dreamy lavender
     ];
 
-    // Perfectly balanced particle count: clearly visible and floating, but not overcrowding text
+    // Battery & CPU thermal optimization:
     const isMobile = window.innerWidth < 640;
-    const count = isMobile ? 11 : 20;
+    const targetFpsInterval = isMobile ? 55 : 28; // ~18 FPS on mobile, ~35 FPS on desktop
+    let lastDrawTime = 0;
+    let isScrolling = false;
+    let scrollTimeout = null;
+    let idleTimeout = null;
+
+    // Wake up canvas on user interaction and auto-pause when idle on mobile to keep device ice-cold
+    const wakeUp = () => {
+      if (!isRunning && !document.hidden) {
+        isRunning = true;
+        lastDrawTime = performance.now();
+        animationFrameId = requestAnimationFrame(render);
+      }
+      if (isMobile) {
+        if (idleTimeout) clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(() => {
+          isRunning = false;
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        }, 3500); // Stop rendering if user is idle for 3.5s (e.g. reading a letter or viewing a photo)
+      }
+    };
+
+    // Pause canvas completely while actively scrolling on mobile to keep 60fps/120fps scroll silky
+    const handleScroll = () => {
+      wakeUp();
+      if (!isMobile) return;
+      isScrolling = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 100);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchstart', wakeUp, { passive: true });
+    window.addEventListener('touchmove', wakeUp, { passive: true });
+
+    // Perfectly balanced particle count: 5 on mobile, 14 on desktop
+    const count = isMobile ? 5 : 14;
 
     const particles = [];
 
@@ -114,6 +151,7 @@ export default function FloatingHeartsCanvas() {
     // Smooth romantic cursor trail on desktop
     let lastMouseTime = 0;
     const handleMouseMove = (e) => {
+      wakeUp();
       const now = performance.now();
       if (now - lastMouseTime < 75) return;
       lastMouseTime = now;
@@ -132,6 +170,7 @@ export default function FloatingHeartsCanvas() {
 
     // Click burst: creates a lovely cluster of 3 floating hearts
     const handleClick = (e) => {
+      wakeUp();
       for (let i = 0; i < 3; i++) {
         const p = new Particle(
           true,
@@ -155,34 +194,46 @@ export default function FloatingHeartsCanvas() {
         isRunning = false;
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
       } else {
-        if (!isRunning) {
-          isRunning = true;
-          animationFrameId = requestAnimationFrame(render);
-        }
+        wakeUp();
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    const render = () => {
+    const render = (currentTime) => {
       if (!isRunning) return;
+
+      animationFrameId = requestAnimationFrame(render);
+
+      // Skip painting while actively scrolling on mobile to keep GPU cool
+      if (isScrolling) return;
+
+      // Throttle FPS to prevent GPU overheating & heavy battery drain
+      const elapsed = currentTime - lastDrawTime;
+      if (elapsed < targetFpsInterval) return;
+      lastDrawTime = currentTime - (elapsed % targetFpsInterval);
+
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
       }
-
-      animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // Kick off animation loop and start mobile idle countdown
+    wakeUp();
 
     return () => {
       isRunning = false;
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchstart', wakeUp);
+      window.removeEventListener('touchmove', wakeUp);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (idleTimeout) clearTimeout(idleTimeout);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);

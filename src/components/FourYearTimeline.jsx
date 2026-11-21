@@ -147,13 +147,14 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
               >
                 {/* Background placeholder while image loads */}
                 <div className="absolute inset-0 flex items-center justify-center text-rose-300">
-                  <Camera className="w-6 h-6 animate-pulse opacity-60" />
+                  <Camera className="w-6 h-6 opacity-40" />
                 </div>
 
                 <img
                   src={photo.src}
                   alt={photo.caption}
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     if (!e.target.dataset.retried) {
                       e.target.dataset.retried = "true";

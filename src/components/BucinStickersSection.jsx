@@ -294,6 +294,8 @@ export default function BucinStickersSection() {
   };
 
   useEffect(() => {
+    if (!activeDraggingId) return;
+
     const handlePointerMove = (e) => {
       if (!dragContextRef.current || !boardRef.current) return;
       const ctx = dragContextRef.current;
@@ -346,7 +348,7 @@ export default function BucinStickersSection() {
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
     };
-  }, []);
+  }, [activeDraggingId]);
 
   const handleRemoveFromBoard = (id, e) => {
     if (e) e.stopPropagation();
@@ -473,7 +475,7 @@ export default function BucinStickersSection() {
 
               {/* Big Featured Sticker */}
               <div className="relative w-28 h-28 sm:w-36 sm:h-36 mx-auto mb-3 flex items-center justify-center">
-                <div className="absolute inset-0 bg-rose-200/40 rounded-full blur-xl scale-90 animate-pulse" />
+                <div className="absolute inset-0 bg-rose-200/40 rounded-full scale-95" />
                 <img
                   src={selectedSticker.file}
                   alt={selectedSticker.title}

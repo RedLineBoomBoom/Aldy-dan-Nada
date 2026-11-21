@@ -41,7 +41,7 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
   };
 
   return (
-    <section id="galeri" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-7xl mx-auto">
+    <section id="galeri" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-7xl mx-auto section-opt">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3">
@@ -119,13 +119,14 @@ export default function InteractivePolaroidWall({ photos = [], likes = {}, onLik
               <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-rose-50 mb-2 sm:mb-3 group/frame">
                 {/* Background placeholder while image loads */}
                 <div className="absolute inset-0 flex items-center justify-center text-rose-200">
-                  <Camera className="w-6 h-6 animate-pulse opacity-60" />
+                  <Camera className="w-6 h-6 opacity-40" />
                 </div>
 
                 <img
                   src={photo.src}
                   alt={photo.caption}
                   loading={index < 8 ? "eager" : "lazy"}
+                  decoding="async"
                   onError={(e) => {
                     if (!e.target.dataset.retried) {
                       e.target.dataset.retried = "true";
