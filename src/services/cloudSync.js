@@ -9,7 +9,7 @@ let db = null;
 if (isFirebaseConfigured) {
   try {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-    db = getDatabase(app);
+    db = getDatabase(app, firebaseConfig.databaseURL);
   } catch (err) {
     console.warn('Firebase initialization notice:', err);
   }

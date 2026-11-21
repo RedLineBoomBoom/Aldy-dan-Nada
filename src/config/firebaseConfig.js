@@ -2,7 +2,7 @@
 export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyBIaDMwezDMak_WD0Yx-n1tpFViypd-7aE",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "aldy-dan-nada.firebaseapp.com",
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL || "https://aldy-dan-nada-default-rtdb.firebaseio.com",
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL || "https://aldy-dan-nada-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "aldy-dan-nada",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "aldy-dan-nada.firebasestorage.app",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "796589005941",
@@ -12,7 +12,7 @@ export const firebaseConfig = {
 
 // Auto-fallback databaseURL jika projectId terisi tapi databaseURL kosong
 if (firebaseConfig.projectId && !firebaseConfig.databaseURL) {
-  firebaseConfig.databaseURL = `https://${firebaseConfig.projectId}-default-rtdb.firebaseio.com`;
+  firebaseConfig.databaseURL = `https://${firebaseConfig.projectId}-default-rtdb.asia-southeast1.firebasedatabase.app`;
 }
 
 export const isFirebaseConfigured = Boolean(
