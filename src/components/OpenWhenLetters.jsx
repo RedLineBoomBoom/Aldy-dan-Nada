@@ -164,78 +164,78 @@ export default function OpenWhenLetters() {
               e.preventDefault();
             }
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-300 overscroll-none touch-none"
+          className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-300 overscroll-none"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            onTouchMove={(e) => e.stopPropagation()}
-            className="relative w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-lg bg-[#fffdfa] border-0 sm:border sm:border-rose-200 rounded-none sm:rounded-3xl p-5 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col justify-between overflow-y-auto overscroll-contain touch-pan-y no-scrollbar"
+            className="relative w-full h-[100dvh] sm:h-auto sm:max-h-[92vh] sm:max-w-lg bg-[#fffdfa] border-0 sm:border sm:border-rose-200 rounded-none sm:rounded-3xl shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col overflow-hidden"
           >
             {/* Top Tape decoration (visible on desktop/tablet) */}
-            <div className="hidden sm:block absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs" />
+            <div className="hidden sm:block absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs z-30" />
 
-            <div>
-              {/* Sticky Header with Title and Close Button */}
-              <div className="sticky top-0 -mt-2 pt-2 pb-3 mb-4 sm:mb-5 bg-[#fffdfa]/95 backdrop-blur-xs z-10 flex items-start justify-between gap-3 border-b border-rose-100">
-                <div className="flex items-center gap-2.5">
-                  <span className="text-3xl sm:text-4xl shrink-0">{activeLetter.icon}</span>
-                  <div>
-                    <span className="text-[10px] sm:text-xs uppercase font-bold tracking-wider text-rose-500 block">
-                      {activeLetter.badge}
-                    </span>
-                    <h3 className="font-romantic text-lg sm:text-2xl font-bold text-gray-900 leading-snug">
-                      {activeLetter.title}
-                    </h3>
-                  </div>
+            {/* Sticky Header with Title and Close Button */}
+            <div className="sticky top-0 bg-[#fffdfa]/95 backdrop-blur-md z-20 px-5 sm:px-8 pt-4 sm:pt-6 pb-3 border-b border-rose-100 flex items-start justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-2.5">
+                <span className="text-3xl sm:text-4xl shrink-0">{activeLetter.icon}</span>
+                <div>
+                  <span className="text-[10px] sm:text-xs uppercase font-bold tracking-wider text-rose-500 block">
+                    {activeLetter.badge}
+                  </span>
+                  <h3 className="font-romantic text-lg sm:text-2xl font-bold text-gray-900 leading-snug">
+                    {activeLetter.title}
+                  </h3>
                 </div>
-                <button
-                  onClick={() => setActiveLetter(null)}
-                  className="p-1.5 sm:p-2 rounded-full bg-rose-50 sm:bg-transparent hover:bg-rose-100 text-gray-500 hover:text-rose-600 transition cursor-pointer shrink-0"
-                  title="Tutup"
-                >
-                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
-                </button>
               </div>
+              <button
+                onClick={() => setActiveLetter(null)}
+                className="p-1.5 sm:p-2 rounded-full bg-rose-50 sm:bg-transparent hover:bg-rose-100 text-gray-500 hover:text-rose-600 transition cursor-pointer shrink-0"
+                title="Tutup"
+              >
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
+            </div>
 
+            {/* Scrollable Body: Content, Cutout Photo, and Signature flow in sequence with NO overlapping */}
+            <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-5 space-y-6 overscroll-contain touch-pan-y no-scrollbar">
               {/* Content Body in Romantic Typography */}
               <div className="space-y-4 text-gray-800 font-romantic text-sm sm:text-base leading-relaxed">
                 {activeLetter.content.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
               </div>
-            </div>
 
-            {/* Transparent Couple Cutout filling the empty space on Mobile & Desktop (Enlarged & Unique per mood) */}
-            <div className="flex-1 my-2 sm:my-4 flex flex-col items-center justify-center pointer-events-none select-none relative min-h-[210px] sm:min-h-[260px]">
-              <div className="relative w-full flex flex-col items-center justify-center">
-                {/* Soft warm romantic glow behind cutout */}
-                <div className="absolute inset-0 bg-gradient-to-t from-rose-200/50 via-pink-100/30 to-transparent rounded-full blur-2xl scale-125 pointer-events-none" />
-                <img
-                  src={activeLetter.cutout || '/bg_couple_right.png'}
-                  alt={activeLetter.title}
-                  className="relative max-h-[280px] sm:max-h-[340px] w-auto max-w-[92%] sm:max-w-[85%] object-contain drop-shadow-md opacity-90 [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] animate-float-slow"
-                />
-                {activeLetter.caption && (
-                  <span className="text-[11px] sm:text-xs font-romantic italic text-rose-500/90 mt-1.5 text-center px-4 tracking-wide drop-shadow-xs">
-                    {activeLetter.caption}
-                  </span>
-                )}
+              {/* Transparent Couple Cutout - placed AFTER text in natural flow */}
+              <div className="pt-2 pb-2 flex flex-col items-center justify-center select-none relative">
+                <div className="relative w-full flex flex-col items-center justify-center">
+                  {/* Soft warm romantic glow behind cutout */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-rose-200/40 via-pink-100/20 to-transparent rounded-full blur-2xl pointer-events-none" />
+                  <img
+                    src={activeLetter.cutout || '/bg_couple_right.png'}
+                    alt={activeLetter.title}
+                    className="relative max-h-[220px] sm:max-h-[260px] w-auto max-w-[85%] object-contain drop-shadow-md opacity-95 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] animate-float-slow"
+                  />
+                  {activeLetter.caption && (
+                    <span className="text-[11px] sm:text-xs font-romantic italic text-rose-500/90 mt-2 text-center px-4 tracking-wide">
+                      {activeLetter.caption}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
-            {/* Signature & Mobile Easy Close Button */}
-            <div className="mt-2 sm:mt-6 pt-3 sm:pt-4 border-t border-rose-100 shrink-0">
-              <div className="flex items-center justify-between text-xs sm:text-sm text-rose-400">
-                <span className="font-handwriting text-3xl sm:text-2xl text-rose-700 font-bold">
-                  Aldy ❤️
-                </span>
-                <span className="font-medium text-rose-500">Selalu ada untukmu</span>
+              {/* Signature */}
+              <div className="pt-3 border-t border-rose-100">
+                <div className="flex items-center justify-between text-xs sm:text-sm text-rose-400">
+                  <span className="font-handwriting text-3xl sm:text-2xl text-rose-700 font-bold">
+                    Aldy ❤️
+                  </span>
+                  <span className="font-medium text-rose-500">Selalu ada untukmu</span>
+                </div>
               </div>
 
               {/* Bottom Close Button for Mobile One-Handed Use */}
               <button
                 onClick={() => setActiveLetter(null)}
-                className="sm:hidden mt-5 w-full py-3 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400 hover:from-rose-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md shadow-rose-500/20 active:scale-98 transition flex items-center justify-center gap-2 text-sm"
+                className="sm:hidden mt-2 w-full py-3 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400 hover:from-rose-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md shadow-rose-500/20 active:scale-98 transition flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <Heart className="w-4 h-4 fill-white shrink-0" />
                 <span>Tutup Surat</span>
