@@ -170,6 +170,9 @@ export default function App() {
         {/* Infografis Statistik Cinta 4 Tahun (Angka-angka bermakna) */}
         <LoveStatsInfographic />
 
+        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) */}
+        <LoveLetterSection />
+
         {/* 4-Year Story Timeline (Chapters 1, 2, 3, 4) */}
         <FourYearTimeline
           photos={rawPhotos}
@@ -186,9 +189,6 @@ export default function App() {
 
         {/* Pesan Suara Khusus Dari Aldy (Vintage Cassette Voice Note Player) */}
         <VoiceNotePlayer />
-
-        {/* Surat Cinta Utama (Amplop Segel Lilin Merah) */}
-        <LoveLetterSection />
 
         {/* Kotak Surat "Open When..." (Buka saat kangen, capek, kesel, semangat) */}
         <OpenWhenLetters />
