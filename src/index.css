@@ -147,7 +147,7 @@
 
 /* Performance Optimizations for Mobile & Desktop */
 .section-opt {
-  contain: layout style;
+  contain: style;
 }
 
 /* GPU Layer Promotion for silky smooth transitions */

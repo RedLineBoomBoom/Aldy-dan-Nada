@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Mail, Heart, Sparkles, X, Moon, Smile, Frown, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -95,7 +96,7 @@ export default function OpenWhenLetters() {
   };
 
   return (
-    <section id="open-when" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto section-opt">
+    <section id="open-when" className="py-14 sm:py-20 px-3.5 sm:px-4 max-w-6xl mx-auto">
       {/* Header */}
       <div className="text-center mb-10 sm:mb-14">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 whitespace-nowrap">
@@ -145,8 +146,8 @@ export default function OpenWhenLetters() {
         ))}
       </div>
 
-      {/* Letter Reading Modal */}
-      {activeLetter && (
+      {/* Letter Reading Modal (Rendered via React Portal directly into body for true viewport fullscreen on mobile) */}
+      {activeLetter && typeof document !== 'undefined' && createPortal(
         <div
           onClick={() => setActiveLetter(null)}
           onTouchMove={(e) => {
@@ -155,54 +156,68 @@ export default function OpenWhenLetters() {
               e.preventDefault();
             }
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3.5 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-300 overscroll-none touch-none"
+          className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-300 overscroll-none touch-none"
         >
           <div
             onClick={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg bg-[#fffdfa] border border-rose-200 rounded-3xl p-6 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 max-h-[85vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain touch-pan-y no-scrollbar"
+            className="relative w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-lg bg-[#fffdfa] border-0 sm:border sm:border-rose-200 rounded-none sm:rounded-3xl p-5 sm:p-10 shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col justify-between overflow-y-auto overscroll-contain touch-pan-y no-scrollbar"
           >
-            {/* Top Tape decoration */}
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs" />
+            {/* Top Tape decoration (visible on desktop/tablet) */}
+            <div className="hidden sm:block absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-rose-200/90 rounded -rotate-1 border border-white/60 shadow-xs" />
 
-            {/* Header */}
-            <div className="flex items-start justify-between gap-3 border-b border-rose-100 pb-3 mb-5">
-              <div className="flex items-center gap-2.5">
-                <span className="text-3xl">{activeLetter.icon}</span>
-                <div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-rose-500 block">
-                    {activeLetter.badge}
-                  </span>
-                  <h3 className="font-romantic text-lg sm:text-xl font-bold text-gray-900">
-                    {activeLetter.title}
-                  </h3>
+            <div>
+              {/* Sticky Header with Title and Close Button */}
+              <div className="sticky top-0 -mt-2 pt-2 pb-3 mb-4 sm:mb-5 bg-[#fffdfa]/95 backdrop-blur-xs z-10 flex items-start justify-between gap-3 border-b border-rose-100">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-3xl sm:text-4xl shrink-0">{activeLetter.icon}</span>
+                  <div>
+                    <span className="text-[10px] sm:text-xs uppercase font-bold tracking-wider text-rose-500 block">
+                      {activeLetter.badge}
+                    </span>
+                    <h3 className="font-romantic text-lg sm:text-2xl font-bold text-gray-900 leading-snug">
+                      {activeLetter.title}
+                    </h3>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setActiveLetter(null)}
+                  className="p-1.5 sm:p-2 rounded-full bg-rose-50 sm:bg-transparent hover:bg-rose-100 text-gray-500 hover:text-rose-600 transition cursor-pointer shrink-0"
+                  title="Tutup"
+                >
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                </button>
               </div>
+
+              {/* Content Body in Romantic Typography */}
+              <div className="space-y-4 text-gray-800 font-romantic text-sm sm:text-base leading-relaxed">
+                {activeLetter.content.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Signature & Mobile Easy Close Button */}
+            <div className="mt-8 pt-4 border-t border-rose-100">
+              <div className="flex items-center justify-between text-xs sm:text-sm text-rose-400">
+                <span className="font-handwriting text-3xl sm:text-2xl text-rose-700 font-bold">
+                  Aldy ❤️
+                </span>
+                <span className="font-medium text-rose-500">Selalu ada untukmu</span>
+              </div>
+
+              {/* Bottom Close Button for Mobile One-Handed Use */}
               <button
                 onClick={() => setActiveLetter(null)}
-                className="p-1 rounded-full hover:bg-rose-50 text-gray-400 hover:text-rose-600 transition cursor-pointer"
-                title="Tutup"
+                className="sm:hidden mt-5 w-full py-3 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-400 hover:from-rose-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md shadow-rose-500/20 active:scale-98 transition flex items-center justify-center gap-2 text-sm"
               >
-                <X className="w-5 h-5" />
+                <Heart className="w-4 h-4 fill-white shrink-0" />
+                <span>Tutup Surat</span>
               </button>
             </div>
-
-            {/* Content Body in Romantic Typography */}
-            <div className="space-y-3.5 text-gray-800 font-romantic text-sm sm:text-base leading-relaxed">
-              {activeLetter.content.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
-            </div>
-
-            {/* Signature */}
-            <div className="mt-6 pt-4 border-t border-rose-100 flex items-center justify-between text-xs text-rose-400">
-              <span className="font-handwriting text-2xl text-rose-700 font-bold">
-                Aldy ❤️
-              </span>
-              <span>Selalu ada untukmu</span>
-            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
