@@ -16,6 +16,27 @@ export default function HeroSection({ featuredPhotos = [] }) {
   });
 
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  const samplePhotos = featuredPhotos.length > 0 ? featuredPhotos : [
+    { src: '/photos/photo_01.webp', caption: 'Kencan pertama kita yang selalu bikin senyum ❤️' },
+    { src: '/photos/photo_07.webp', caption: 'Tertawa lepas bareng kamu adalah momen terbaik ✨' },
+    { src: '/photos/photo_16.webp', caption: 'Selalu ada cerita baru setiap hari sama Nada 🌸' },
+    { src: '/photos/photo_31.webp', caption: 'Tempat pulang ternyaman Aldy 🥰' },
+    { src: '/photos/photo_46.webp', caption: '4 tahun dan akan terus selamanya 💕' },
+  ];
+
+  // Preload all featured photos in background so clicking "Ganti" is 100% instantaneous with 0ms lag
+  useEffect(() => {
+    samplePhotos.forEach((p) => {
+      if (p?.src) {
+        const img = new Image();
+        img.src = p.src;
+        img.decoding = 'async';
+      }
+    });
+  }, [featuredPhotos]);
 
   useEffect(() => {
     const updateCounter = () => {
@@ -42,24 +63,16 @@ export default function HeroSection({ featuredPhotos = [] }) {
   }, []);
 
   const handleNextPhoto = () => {
-    if (featuredPhotos.length > 0) {
-      setActivePhotoIdx((prev) => (prev + 1) % featuredPhotos.length);
-      confetti({
-        particleCount: 20,
-        spread: 40,
-        origin: { y: 0.5 },
-        colors: ['#f43f5e', '#fb7185', '#fda4af'],
-      });
-    }
-  };
+    if (samplePhotos.length <= 1) return;
+    setIsSpinning(true);
+    setIsTransitioning(true);
 
-  const samplePhotos = featuredPhotos.length > 0 ? featuredPhotos : [
-    { src: '/photos/photo_01.webp', caption: 'Kencan pertama kita yang selalu bikin senyum ❤️' },
-    { src: '/photos/photo_07.webp', caption: 'Tertawa lepas bareng kamu adalah momen terbaik ✨' },
-    { src: '/photos/photo_16.webp', caption: 'Selalu ada cerita baru setiap hari sama Nada 🌸' },
-    { src: '/photos/photo_31.webp', caption: 'Tempat pulang ternyaman Aldy 🥰' },
-    { src: '/photos/photo_46.webp', caption: '4 tahun dan akan terus selamanya 💕' },
-  ];
+    setTimeout(() => {
+      setActivePhotoIdx((prev) => (prev + 1) % samplePhotos.length);
+      setIsTransitioning(false);
+      setTimeout(() => setIsSpinning(false), 250);
+    }, 100);
+  };
 
   const currentPhoto = samplePhotos[activePhotoIdx % samplePhotos.length];
 
@@ -151,23 +164,26 @@ export default function HeroSection({ featuredPhotos = [] }) {
           {/* Masking tape on top */}
           <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-5 sm:h-6 bg-rose-200/85 rounded-sm -rotate-1 border border-white/60 shadow-xs pointer-events-none" />
 
-          {/* Photo container */}
+          {/* Photo container with GPU acceleration */}
           <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-rose-50 mb-3 group/img">
             <img
               src={currentPhoto.src}
               alt={currentPhoto.caption || 'Kenangan Aldy dan Nada'}
-              fetchPriority="high"
-              decoding="sync"
+              decoding="async"
+              loading="eager"
               width={400}
               height={500}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
+              className={`w-full h-full object-cover transform-gpu transition-opacity duration-200 ${
+                isTransitioning ? 'opacity-40 scale-100' : 'opacity-100 group-hover/img:scale-105'
+              }`}
             />
-            {/* Click to shuffle badge */}
+            {/* Click to shuffle badge with snappy icon spin */}
             <button
+              type="button"
               onClick={handleNextPhoto}
-              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow border border-rose-100 flex items-center gap-1 transition active:scale-95 cursor-pointer whitespace-nowrap"
+              className="absolute bottom-2.5 right-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-white/95 hover:bg-white text-rose-700 text-[11px] sm:text-xs font-semibold rounded-full shadow border border-rose-100 flex items-center gap-1.5 transition active:scale-95 cursor-pointer whitespace-nowrap select-none"
             >
-              <RotateCw className="w-3 h-3 shrink-0" />
+              <RotateCw className={`w-3 h-3 shrink-0 transition-transform duration-300 ${isSpinning ? 'rotate-180' : ''}`} />
               <span className="whitespace-nowrap">Ganti ({activePhotoIdx + 1}/{samplePhotos.length})</span>
             </button>
           </div>
