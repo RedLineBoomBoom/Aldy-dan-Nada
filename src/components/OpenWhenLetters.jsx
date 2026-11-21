@@ -196,26 +196,26 @@ export default function OpenWhenLetters() {
             </div>
 
             {/* Scrollable Body: Content, Cutout Photo, and Signature flow in sequence with NO overlapping */}
-            <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-5 space-y-6 overscroll-contain touch-pan-y no-scrollbar">
+            <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-4 sm:py-5 space-y-4 sm:space-y-5 overscroll-contain touch-pan-y no-scrollbar">
               {/* Content Body in Romantic Typography */}
-              <div className="space-y-4 text-gray-800 font-romantic text-sm sm:text-base leading-relaxed">
+              <div className="space-y-3.5 sm:space-y-4 text-gray-800 font-romantic text-sm sm:text-base leading-relaxed">
                 {activeLetter.content.map((paragraph, idx) => (
                   <p key={idx}>{paragraph}</p>
                 ))}
               </div>
 
-              {/* Transparent Couple Cutout - placed AFTER text in natural flow */}
-              <div className="pt-2 pb-2 flex flex-col items-center justify-center select-none relative">
+              {/* Transparent Couple Cutout - tight, nicely sized, zero empty space */}
+              <div className="pt-1 pb-1 flex flex-col items-center justify-center select-none relative">
                 <div className="relative w-full flex flex-col items-center justify-center">
                   {/* Soft warm romantic glow behind cutout */}
                   <div className="absolute inset-0 bg-gradient-to-t from-rose-200/40 via-pink-100/20 to-transparent rounded-full blur-2xl pointer-events-none" />
                   <img
                     src={activeLetter.cutout || '/bg_couple_right.png'}
                     alt={activeLetter.title}
-                    className="relative max-h-[220px] sm:max-h-[260px] w-auto max-w-[85%] object-contain drop-shadow-md opacity-95 [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] animate-float-slow"
+                    className="relative max-h-[250px] sm:max-h-[300px] w-auto max-w-[95%] sm:max-w-[85%] object-contain drop-shadow-md opacity-95 [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] animate-float-slow"
                   />
                   {activeLetter.caption && (
-                    <span className="text-[11px] sm:text-xs font-romantic italic text-rose-500/90 mt-2 text-center px-4 tracking-wide">
+                    <span className="text-[11px] sm:text-xs font-romantic italic text-rose-600 mt-2 text-center px-4 max-w-sm tracking-wide leading-snug">
                       {activeLetter.caption}
                     </span>
                   )}

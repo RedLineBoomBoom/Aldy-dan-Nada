@@ -134,15 +134,15 @@ export default function TimeCapsuleWishBox() {
 
         {/* Wishes Display List */}
         <div className="lg:col-span-7 space-y-3.5">
-          <div className="flex items-center justify-between mb-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-2">
             <h4 className="text-xs sm:text-sm font-bold text-gray-800 flex items-center gap-1.5">
-              <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
-              <span>Harapan yang Sudah Terkunci ({wishes.length})</span>
+              <Heart className="w-4 h-4 fill-rose-500 text-rose-500 shrink-0" />
+              <span>Harapan yang Terkunci ({wishes.length})</span>
             </h4>
             {isFirebaseConfigured ? (
-              <span className="text-[11px] text-emerald-600 font-medium flex items-center gap-1.5 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Tersinkron di Semua HP ✨
+              <span className="self-start sm:self-auto text-[10px] text-emerald-600 font-semibold flex items-center gap-1.5 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                <span>Tersinkron di Semua HP ✨</span>
               </span>
             ) : (
               <span className="text-[11px] text-gray-400">Tersimpan di Kapsul ✨</span>

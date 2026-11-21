@@ -75,13 +75,13 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
       </div>
 
       {/* Interactive Tabs for Years (Grid on mobile to fit all 4 years without clipping) */}
-      <div className="flex justify-center mb-8 sm:mb-12">
-        <div className="grid grid-cols-4 w-full max-w-lg p-1 sm:p-1.5 bg-rose-100/70 border border-rose-200/80 rounded-2xl shadow-inner gap-1 sm:gap-2">
+      <div className="flex justify-center mb-6 sm:mb-10">
+        <div className="grid grid-cols-4 w-full max-w-md p-1 sm:p-1.5 bg-rose-100/70 border border-rose-200/80 rounded-2xl shadow-inner gap-1 sm:gap-2">
           {chapters.map((ch) => (
             <button
               key={ch.year}
               onClick={() => setActiveYearTab(ch.year)}
-              className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-1 sm:px-4 py-2 sm:py-2.5 rounded-xl text-center transition-all duration-300 cursor-pointer ${
+              className={`flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 px-1 sm:px-4 py-1.5 sm:py-2.5 rounded-xl text-center transition-all duration-300 cursor-pointer ${
                 activeYearTab === ch.year
                   ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30 font-bold scale-[1.02]'
                   : 'text-gray-700 hover:text-rose-700 hover:bg-white/60 font-medium'
@@ -99,7 +99,7 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
         {/* Glow accent */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-rose-100/50 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 border-b border-rose-100/80 pb-5 sm:pb-6">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-6 mb-5 sm:mb-8 border-b border-rose-100/80 pb-4 sm:pb-6">
           <div>
             <span className="inline-block text-[11px] sm:text-xs uppercase tracking-wider font-bold text-rose-500 mb-1">
               {currentChapter.period}
@@ -112,9 +112,9 @@ export default function FourYearTimeline({ photos = [], onSelectPhoto }) {
             </p>
           </div>
 
-          <div className="w-full md:w-auto px-3.5 sm:px-4 py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-start sm:items-center gap-2 text-rose-700 text-xs font-semibold">
-            <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5 sm:mt-0" />
-            <span className="leading-snug">{currentChapter.milestone}</span>
+          <div className="w-full md:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-rose-50 border border-rose-200/60 rounded-2xl flex items-start sm:items-center gap-1.5 text-rose-700 font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5 sm:mt-0" />
+            <span className="leading-snug text-[11px] sm:text-xs">{currentChapter.milestone}</span>
           </div>
         </div>
 
