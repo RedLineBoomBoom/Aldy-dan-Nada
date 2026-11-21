@@ -197,8 +197,21 @@ export default function OpenWhenLetters() {
               </div>
             </div>
 
+            {/* Transparent Couple Cutout filling the empty space on Mobile & Desktop */}
+            <div className="flex-1 my-3 sm:my-4 flex flex-col items-center justify-center pointer-events-none select-none relative min-h-[140px] sm:min-h-[160px]">
+              <div className="relative flex items-center justify-center">
+                {/* Soft warm romantic glow behind cutout */}
+                <div className="absolute inset-0 bg-gradient-to-t from-rose-200/40 via-pink-100/25 to-transparent rounded-full blur-xl scale-110 pointer-events-none" />
+                <img
+                  src="/bg_couple_right.png"
+                  alt="Aldy & Nada"
+                  className="relative max-h-48 sm:max-h-56 w-auto object-contain drop-shadow-md opacity-85 [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] animate-float-slow"
+                />
+              </div>
+            </div>
+
             {/* Signature & Mobile Easy Close Button */}
-            <div className="mt-8 pt-4 border-t border-rose-100">
+            <div className="mt-2 sm:mt-6 pt-3 sm:pt-4 border-t border-rose-100 shrink-0">
               <div className="flex items-center justify-between text-xs sm:text-sm text-rose-400">
                 <span className="font-handwriting text-3xl sm:text-2xl text-rose-700 font-bold">
                   Aldy ❤️
